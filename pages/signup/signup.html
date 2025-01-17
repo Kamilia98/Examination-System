@@ -15,6 +15,14 @@
         color: red;
       }
     </style>
+    <!-- Toastify CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
+    <!-- Toastify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   </head>
   <body>
     <form action="home.html" id="signupForm">
@@ -28,8 +36,15 @@
         <input type="text" id="lNameInput" />
         <span class="error-message"></span>
       </div>
+      <div class="form-input">
+        <label for="emailInput">Email</label>
+        <input type="text" id="emailInput" />
+        <span class="error-message"></span>
+      </div>
       <button type="submit">Submit</button>
     </form>
+
+    <a href="../Login/login.html">Already have an account</a>
     <script type="module" src="signup.js"></script>
   </body>
 </html>
