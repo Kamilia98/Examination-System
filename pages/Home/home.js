@@ -1,8 +1,10 @@
-const user = localStorage.getItem('user');
+const { firstName, lastName } = JSON.parse(localStorage.getItem('user'));
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.clear();
   location.href = '../../index.html';
 });
+
+console.log(firstName);
 
 // function fetchUser(userId) {
 //   fetch(`http://localhost:3000/users?id=${userId}`, {
