@@ -1,0 +1,292 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "exams": [
+        { "examId": 101, "status": "pending", "score": null },
+        { "examId": 102, "status": "pending", "score": null }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "exams": [{ "examId": 201, "status": "pending", "score": null }]
+    }
+  ],
+  "exams": [
+    {
+      "id": 101,
+      "title": "HTML Basics Exam"
+    },
+    {
+      "id": 102,
+      "title": "CSS Fundamentals Exam"
+    },
+    {
+      "id": 201,
+      "title": "Advanced HTML and CSS Exam"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "examId": 101,
+      "text": "What does HTML stand for?",
+      "options": [
+        "Hyper Text Markup Language",
+        "Hyperlinks and Text Markup Language",
+        "Home Tool Markup Language",
+        "Hyper Transfer Markup Language"
+      ],
+      "correctAnswer": "Hyper Text Markup Language"
+    },
+    {
+      "id": 2,
+      "examId": 101,
+      "text": "Which HTML tag is used to define the largest heading?",
+      "options": ["<heading>", "<h1>", "<head>", "<h6>"],
+      "correctAnswer": "<h1>"
+    },
+    {
+      "id": 3,
+      "examId": 101,
+      "text": "Which tag is used for inserting a line break?",
+      "options": ["<break>", "<lb>", "<br>", "<line>"],
+      "correctAnswer": "<br>"
+    },
+    {
+      "id": 4,
+      "examId": 101,
+      "text": "Which attribute specifies an alternative text for an image?",
+      "options": ["src", "alt", "title", "href"],
+      "correctAnswer": "alt"
+    },
+    {
+      "id": 5,
+      "examId": 101,
+      "text": "Which HTML tag is used to display a numbered list?",
+      "options": ["<ul>", "<ol>", "<list>", "<dl>"],
+      "correctAnswer": "<ol>"
+    },
+    {
+      "id": 6,
+      "examId": 101,
+      "text": "Which HTML element is used to define a paragraph?",
+      "options": ["<div>", "<p>", "<span>", "<para>"],
+      "correctAnswer": "<p>"
+    },
+    {
+      "id": 7,
+      "examId": 101,
+      "text": "Which of the following is the correct way to link an external stylesheet?",
+      "options": [
+        "<stylesheet>",
+        "<css>",
+        "<link rel='stylesheet' href='style.css'>",
+        "<style src='style.css'>"
+      ],
+      "correctAnswer": "<link rel='stylesheet' href='style.css'>"
+    },
+    {
+      "id": 8,
+      "examId": 101,
+      "text": "Which HTML tag is used to create a hyperlink?",
+      "options": ["<link>", "<a>", "<href>", "<hyperlink>"],
+      "correctAnswer": "<a>"
+    },
+    {
+      "id": 9,
+      "examId": 101,
+      "text": "Which of the following HTML elements is not a valid form control?",
+      "options": ["<input>", "<select>", "<button>", "<footer>"],
+      "correctAnswer": "<footer>"
+    },
+    {
+      "id": 10,
+      "examId": 101,
+      "text": "What is the default file extension for HTML files?",
+      "options": [".html", ".htm", ".html5", ".xhtml"],
+      "correctAnswer": ".html"
+    },
+    {
+      "id": 11,
+      "examId": 102,
+      "text": "What does CSS stand for?",
+      "options": [
+        "Creative Style Sheets",
+        "Cascading Style Sheets",
+        "Colorful Style Sheets",
+        "Computer Style Sheets"
+      ],
+      "correctAnswer": "Cascading Style Sheets"
+    },
+    {
+      "id": 12,
+      "examId": 102,
+      "text": "Which property is used to change the background color?",
+      "options": ["background-color", "color", "bg-color", "background"],
+      "correctAnswer": "background-color"
+    },
+    {
+      "id": 13,
+      "examId": 102,
+      "text": "Which property is used to change the text color of an element?",
+      "options": ["text-color", "color", "font-color", "foreground-color"],
+      "correctAnswer": "color"
+    },
+    {
+      "id": 14,
+      "examId": 102,
+      "text": "How do you select an element with the class 'button' in CSS?",
+      "options": ["#button", ".button", "button", "*button"],
+      "correctAnswer": ".button"
+    },
+    {
+      "id": 15,
+      "examId": 102,
+      "text": "Which CSS property is used to change the font of an element?",
+      "options": ["font-family", "font-style", "font-weight", "font"],
+      "correctAnswer": "font-family"
+    },
+    {
+      "id": 16,
+      "examId": 102,
+      "text": "What is the default position value for an HTML element?",
+      "options": ["static", "relative", "absolute", "fixed"],
+      "correctAnswer": "static"
+    },
+    {
+      "id": 17,
+      "examId": 102,
+      "text": "Which property is used to create space between the element's content and its border?",
+      "options": ["margin", "padding", "border-spacing", "spacing"],
+      "correctAnswer": "padding"
+    },
+    {
+      "id": 18,
+      "examId": 102,
+      "text": "Which CSS property is used to make text bold?",
+      "options": ["font-style", "font-weight", "text-style", "font-bold"],
+      "correctAnswer": "font-weight"
+    },
+    {
+      "id": 19,
+      "examId": 102,
+      "text": "Which CSS property is used to control the stacking order of elements?",
+      "options": ["stack", "z-index", "order", "position"],
+      "correctAnswer": "z-index"
+    },
+    {
+      "id": 20,
+      "examId": 102,
+      "text": "Which CSS unit is relative to the font size of the root element?",
+      "options": ["em", "rem", "%", "px"],
+      "correctAnswer": "rem"
+    },
+    {
+      "id": 21,
+      "examId": 201,
+      "text": "Which attribute is used to define inline CSS styles?",
+      "options": ["class", "id", "style", "css"],
+      "correctAnswer": "style"
+    },
+    {
+      "id": 22,
+      "examId": 201,
+      "text": "Which HTML5 element is used to define navigation links?",
+      "options": ["<nav>", "<section>", "<header>", "<aside>"],
+      "correctAnswer": "<nav>"
+    },
+    {
+      "id": 23,
+      "examId": 201,
+      "text": "What is the purpose of the `<figure>` and `<figcaption>` elements in HTML5?",
+      "options": [
+        "To create captions for tables",
+        "To group media content like images with captions",
+        "To structure forms",
+        "To define metadata for content"
+      ],
+      "correctAnswer": "To group media content like images with captions"
+    },
+    {
+      "id": 24,
+      "examId": 201,
+      "text": "Which CSS property is used to create a flexible layout?",
+      "options": ["flex", "display", "float", "grid"],
+      "correctAnswer": "display"
+    },
+    {
+      "id": 25,
+      "examId": 201,
+      "text": "What does the `z-index` property control?",
+      "options": [
+        "The transparency of an element",
+        "The stacking order of elements",
+        "The spacing between elements",
+        "The alignment of text"
+      ],
+      "correctAnswer": "The stacking order of elements"
+    },
+    {
+      "id": 26,
+      "examId": 201,
+      "text": "Which CSS property is used to create animations?",
+      "options": ["animation", "transform", "transition", "keyframes"],
+      "correctAnswer": "animation"
+    },
+    {
+      "id": 27,
+      "examId": 201,
+      "text": "Which pseudo-class is used to style an element when it has keyboard focus?",
+      "options": [":hover", ":focus", ":active", ":visited"],
+      "correctAnswer": ":focus"
+    },
+    {
+      "id": 28,
+      "examId": 201,
+      "text": "What is the difference between `relative` and `absolute` positioning in CSS?",
+      "options": [
+        "Relative positions an element based on the viewport, while absolute positions it relative to its closest positioned ancestor.",
+        "Relative positions an element relative to its normal position, while absolute positions it based on the viewport.",
+        "Relative and absolute are the same in CSS.",
+        "Relative positions an element based on the viewport, while absolute positions it relative to its sibling elements."
+      ],
+      "correctAnswer": "Relative positions an element relative to its normal position, while absolute positions it based on the viewport."
+    },
+    {
+      "id": 29,
+      "examId": 201,
+      "text": "Which CSS function is used to rotate an element?",
+      "options": ["rotate()", "skew()", "translate()", "transform()"],
+      "correctAnswer": "rotate()"
+    },
+    {
+      "id": 30,
+      "examId": 201,
+      "text": "What does the `media` attribute in a `<link>` tag specify?",
+      "options": [
+        "The type of content the link references",
+        "The type of file being linked",
+        "The device or condition the stylesheet is applied to",
+        "The title of the linked document"
+      ],
+      "correctAnswer": "The device or condition the stylesheet is applied to"
+    },
+    {
+      "id": 31,
+      "examId": 201,
+      "text": "What is the difference between `em` and `rem` units in CSS?",
+      "options": [
+        "`em` is relative to the font size of its parent, while `rem` is relative to the font size of the root element.",
+        "`em` is absolute, while `rem` is relative to its parent element.",
+        "`em` is used for margins, while `rem` is used for font sizes.",
+        "`em` is relative to the viewport, while `rem` is relative to its container."
+      ],
+      "correctAnswer": "`em` is relative to the font size of its parent, while `rem` is relative to the font size of the root element."
+    }
+  ]
+}
