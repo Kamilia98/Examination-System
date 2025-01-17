@@ -1,1 +1,3 @@
-location.href = localStorage.getItem('user') ? 'home.html' : 'signup.html';
+location.href = localStorage.getItem('user')
+  ? 'pages/Home/home.html'
+  : 'pages/Signup/signup.html';

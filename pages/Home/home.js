@@ -1,7 +1,7 @@
 const user = localStorage.getItem('user');
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.clear();
-  location.href = 'index.html';
+  location.href = '../../index.html';
 });
 
 // function fetchUser(userId) {

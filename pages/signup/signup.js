@@ -34,6 +34,6 @@ document.getElementById('signupForm').addEventListener('submit', (e) => {
         lastName: lNameInput.value,
       })
     );
-    location.href = 'home.html?userId=1';
+    location.href = '../Home/home.html?userId=1';
   }
 });
