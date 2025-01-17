@@ -1,47 +1,45 @@
+import { fetchUser, fetchExam } from '../../db/Apis/GET.js';
+
+//local stoarge
 const { firstName, lastName } = JSON.parse(localStorage.getItem('user'));
+
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.clear();
   location.href = '../../index.html';
 });
 
-console.log(firstName);
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get('userId');
+console.log(`Extracted userId: ${userId}`);
+let user = null;
+async function getUser() {
+  [user] = await fetchUser(userId);
+  displayExams(user.exams);
+}
 
-// function fetchUser(userId) {
-//   fetch(`http://localhost:3000/users?id=${userId}`, {
-//     method: 'GET',
-//   })
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//       }
-//       return response.json();
-//     })
-//     .then(([user]) => {
-//       fetchExams(user.exams);
-//     })
-//     .catch((error) => {
-//       console.error('Error fetching user:', error);
-//     });
-// }
+getUser();
 
-// function fetchExams(userExams) {
-//   const examIds = userExams.map((exam) => exam.examId);
-//   fetch('http://localhost:3000/exams')
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       const userExamsDetails = data.filter((exam) =>
-//         examIds.includes(Number(exam.id))
-//       );
-//       console.log(userExamsDetails);
-//     })
-//     .catch((error) => {
-//       console.error('Error fetching exams:', error);
-//     });
-// }
+function displayExams(exams) {
+  const examsContainer = document.querySelector('#exams');
+  console.log(examsContainer);
+  exams.map(async (exam) => {
+    console.log(exam);
+    const [ex] = await fetchExam(exam.examId);
+    const e = document.createElement('div');
+    const titleDiv = document.createElement('div');
+    titleDiv.innerHTML = ex.title;
+    e.appendChild(titleDiv);
+    if (exam.status == 'success') {
+      e.style.color = 'green';
+    } else if (exam.status == 'fail') {
+      e.style.color = 'red';
+    } else {
+      const link = document.createElement('a');
+      link.textContent = 'Start Exam';
+      link.href = `../Exam/exam.html?examId=${exam.examId}`;
+      e.appendChild(link);
+    }
 
-fetchUser(1);
+    examsContainer.appendChild(e);
+  });
+}
