@@ -1,65 +1,84 @@
-import * as gets from '../../db/Apis/GET.js';
-import { createUser } from '../../db/Apis/POST.JS';
+import { fetchUsers } from '../../db/Apis/GET.js';
+import { createUser } from '../../db/Apis/POST.js';
 
-// Get the count of users
-async function getUsers() {
-  const users = await gets.fetchUsers();
-  return users;
-}
+const signupForm = document.getElementById('signupForm');
 
-// Handle form submission
-document.getElementById('signupForm').addEventListener('submit', async (e) => {
+signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const fNameInput = document.getElementById('fNameInput');
-  const lNameInput = document.getElementById('lNameInput');
-  const emailInput = document.getElementById('emailInput');
+  const inputs = {
+    fName: document.getElementById('fNameInput'),
+    lName: document.getElementById('lNameInput'),
+    email: document.getElementById('emailInput'),
+    password: document.getElementById('passwordInput'),
+    confirmPassword: document.getElementById('confirmPasswordInput'),
+  };
 
-  const fNameError = fNameInput
-    .closest('.form-input')
-    .querySelector('.error-message');
-  const lNameError = lNameInput
-    .closest('.form-input')
-    .querySelector('.error-message');
-  const emailError = emailInput
-    .closest('.form-input')
-    .querySelector('.error-message');
+  const errors = {
+    fName: inputs.fName.closest('.form-input').querySelector('.error-message'),
+    lName: inputs.lName.closest('.form-input').querySelector('.error-message'),
+    email: inputs.email.closest('.form-input').querySelector('.error-message'),
+    password: inputs.password
+      .closest('.form-input')
+      .querySelector('.error-message'),
+    confirmPassword: inputs.confirmPassword
+      .closest('.form-input')
+      .querySelector('.error-message'),
+  };
 
-  fNameError.textContent = '';
-  fNameError.textContent = '';
-  emailError.textContent = '';
+  // Clear previous error messages
+  Object.values(errors).forEach((error) => (error.textContent = ''));
 
-  function validateName(param) {
-    return /^[a-zA-Z]+$/.test(param) && param.length >= 3 && param.length <= 20;
+  // Validation functions
+  const validateName = (name) => /^[a-zA-Z]{3,20}$/.test(name);
+  const validateEmail = (email) =>
+    /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  const validatePassword = (password) =>
+    password.length >= 8 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[0-9]/.test(password);
+
+  const validationResults = {
+    fName: validateName(inputs.fName.value),
+    lName: validateName(inputs.lName.value),
+    email: validateEmail(inputs.email.value),
+    password: validatePassword(inputs.password.value),
+    confirmPassword: inputs.password.value === inputs.confirmPassword.value,
+  };
+
+  // Display validation errors
+  if (!validationResults.fName) {
+    errors.fName.textContent =
+      'First name must be 3-20 characters and only letters.';
   }
-  function validateEmail(param) {
-    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(param);
+  if (!validationResults.lName) {
+    errors.lName.textContent =
+      'Last name must be 3-20 characters and only letters.';
+  }
+  if (!validationResults.email) {
+    errors.email.textContent = 'Invalid email format.';
+  }
+  if (!validationResults.password) {
+    errors.password.textContent =
+      'Password must be at least 8 characters, include a number, an uppercase, and a lowercase letter.';
+  }
+  if (!validationResults.confirmPassword) {
+    errors.confirmPassword.textContent = 'Passwords do not match.';
   }
 
-  if (!validateName(fNameInput.value)) {
-    fNameError.textContent =
-      'First name must be between 3 and 20 characters and contain only letters.';
-  }
-  if (!validateName(lNameInput.value)) {
-    lNameError.textContent =
-      'Last name must be between 3 and 20 characters and contain only letters.';
-  }
-
-  if (!validateEmail(emailInput.value)) {
-    emailError.textContent = 'Email should be email.';
-  }
-
-  if (
-    validateName(fNameInput.value) &&
-    validateName(lNameInput.value) &&
-    validateEmail(emailInput.value)
-  ) {
+  // Proceed only if all validations pass
+  if (Object.values(validationResults).every(Boolean)) {
     try {
-      const users = await getUsers();
-      const usersCount = users.length;
-      if (users.some((user) => user.email == emailInput.value)) {
+      const users = await fetchUsers();
+      const isExistingUser = users.some(
+        (user) => user.email === inputs.email.value
+      );
+
+      if (isExistingUser) {
+        // User already signed up so redirect to login
         Toastify({
-          text: 'You already a member!',
+          text: 'You are already a member!',
           duration: 1000,
           gravity: 'top',
           position: 'center',
@@ -70,43 +89,31 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
           window.location.href = '../Login/login.html';
         }, 1000);
       } else {
-        const newId = usersCount + 1;
-        const user = {
-          id: newId,
-          fname: fNameInput.value,
-          lname: lNameInput.value,
-          email: emailInput.value,
+        // Create new user
+        const newUser = {
+          id: users.length + 1,
+          fname: inputs.fName.value,
+          lname: inputs.lName.value,
+          email: inputs.email.value,
+          password: inputs.password.value,
           exams: [
-            {
-              examId: 101,
-              status: 'pending',
-              score: null,
-            },
-            {
-              examId: 102,
-              status: 'pending',
-              score: null,
-            },
-            {
-              examId: 201,
-              status: 'pending',
-              score: null,
-            },
+            { examId: 101, status: 'pending', score: null },
+            { examId: 102, status: 'pending', score: null },
+            { examId: 201, status: 'pending', score: null },
           ],
         };
-        createUser(user);
-
+        // POST to db
+        await createUser(newUser);
+        // Add to LocalStorage to indicate Logged in user
         localStorage.setItem(
           'user',
-          JSON.stringify({
-            firstName: fNameInput.value,
-            lastName: lNameInput.value,
-          })
+          JSON.stringify({ firstName: inputs.fName.value, id: newUser.id })
         );
-        location.href = `../Home/home.html?userId=${newId}`;
+        //Redirect to home passing the userId
+        window.location.href = `../Home/home.html?userId=${newUser.id}`;
       }
     } catch (error) {
-      console.error('Error during user validation:', error);
+      console.error('Error during sign-up process:', error);
     }
   }
 });
