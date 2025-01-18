@@ -4,9 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <p id="examTitle"></p>
+    <time id="examTime"></time>
     <ul class="questions" id="questions"></ul>
+    <button id="prevBtn">Prev</button>
+    <div id="questionNo"></div>
+    <button id="nextBtn">Next</button>
+
+    <button id="submitBtn" type="submit">Submit</button>
     <script type="module" src="./exam.js"></script>
   </body>
 </html>
