@@ -43,12 +43,60 @@
         {
           "examId": 101,
           "status": "fail",
-          "score": 20
+          "score": 10
         },
         {
           "examId": 102,
-          "status": "success",
-          "score": 100
+          "status": "fail",
+          "score": 10
+        },
+        {
+          "examId": 201,
+          "status": "fail",
+          "score": -1
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "email": "kamiliaed01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "fail",
+          "score": 30
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "email": "kamied01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
         },
         {
           "examId": 201,
@@ -61,17 +109,21 @@
   "exams": [
     {
       "id": "101",
-      "title": "HTML Basics Exam"
+      "title": "HTML Basics Exam",
+      "duration": 3
     },
     {
       "id": "102",
-      "title": "CSS Fundamentals Exam"
+      "title": "CSS Fundamentals Exam",
+      "duration": 4
     },
     {
       "id": "201",
-      "title": "Advanced HTML and CSS Exam"
+      "title": "Advanced HTML and CSS Exam",
+      "duration": 5
     }
   ],
+
   "questions": [
     {
       "id": "1",
@@ -83,67 +135,48 @@
         "Home Tool Markup Language",
         "Hyper Transfer Markup Language"
       ],
-      "correctAnswer": 0
+      "correctAnswer": 0,
+      "difficulty": "e"
     },
     {
       "id": "2",
       "examId": 101,
       "text": "Which HTML tag is used to define the largest heading?",
-      "options": [
-        "<heading>",
-        "<h1>",
-        "<head>",
-        "<h6>"
-      ],
-      "correctAnswer": 1
+      "options": ["<heading>", "<h1>", "<head>", "<h6>"],
+      "correctAnswer": 1,
+      "difficulty": "h"
     },
     {
       "id": "3",
       "examId": 101,
       "text": "Which tag is used for inserting a line break?",
-      "options": [
-        "<break>",
-        "<lb>",
-        "<br>",
-        "<line>"
-      ],
-      "correctAnswer": 2
+      "options": ["<break>", "<lb>", "<br>", "<line>"],
+      "correctAnswer": 2,
+      "difficulty": "m"
     },
     {
       "id": "4",
       "examId": 101,
       "text": "Which attribute specifies an alternative text for an image?",
-      "options": [
-        "src",
-        "alt",
-        "title",
-        "href"
-      ],
-      "correctAnswer": 1
+      "options": ["src", "alt", "title", "href"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "5",
       "examId": 101,
       "text": "Which HTML tag is used to display a numbered list?",
-      "options": [
-        "<ul>",
-        "<ol>",
-        "<list>",
-        "<dl>"
-      ],
-      "correctAnswer": 1
+      "options": ["<ul>", "<ol>", "<list>", "<dl>"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "6",
       "examId": 101,
       "text": "Which HTML element is used to define a paragraph?",
-      "options": [
-        "<div>",
-        "<p>",
-        "<span>",
-        "<para>"
-      ],
-      "correctAnswer": 1
+      "options": ["<div>", "<p>", "<span>", "<para>"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "7",
@@ -155,43 +188,32 @@
         "<link rel='stylesheet' href='style.css'>",
         "<style src='style.css'>"
       ],
-      "correctAnswer": 2
+      "correctAnswer": 2,
+      "difficulty": "m"
     },
     {
       "id": "8",
       "examId": 101,
       "text": "Which HTML tag is used to create a hyperlink?",
-      "options": [
-        "<link>",
-        "<a>",
-        "<href>",
-        "<hyperlink>"
-      ],
-      "correctAnswer": 1
+      "options": ["<link>", "<a>", "<href>", "<hyperlink>"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "9",
       "examId": 101,
       "text": "Which of the following HTML elements is not a valid form control?",
-      "options": [
-        "<input>",
-        "<select>",
-        "<button>",
-        "<footer>"
-      ],
-      "correctAnswer": 3
+      "options": ["<input>", "<select>", "<button>", "<footer>"],
+      "correctAnswer": 3,
+      "difficulty": "h"
     },
     {
       "id": "10",
       "examId": 101,
       "text": "What is the default file extension for HTML files?",
-      "options": [
-        ".html",
-        ".htm",
-        ".html5",
-        ".xhtml"
-      ],
-      "correctAnswer": 0
+      "options": [".html", ".htm", ".html5", ".xhtml"],
+      "correctAnswer": 0,
+      "difficulty": "e"
     },
     {
       "id": "11",
@@ -203,139 +225,96 @@
         "Colorful Style Sheets",
         "Computer Style Sheets"
       ],
-      "correctAnswer": 1
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "12",
       "examId": 102,
       "text": "Which property is used to change the background color?",
-      "options": [
-        "background-color",
-        "color",
-        "bg-color",
-        "background"
-      ],
-      "correctAnswer": 0
+      "options": ["background-color", "color", "bg-color", "background"],
+      "correctAnswer": 0,
+      "difficulty": "e"
     },
     {
       "id": "13",
       "examId": 102,
       "text": "Which property is used to change the text color of an element?",
-      "options": [
-        "text-color",
-        "color",
-        "font-color",
-        "foreground-color"
-      ],
-      "correctAnswer": 1
+      "options": ["text-color", "color", "font-color", "foreground-color"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "14",
       "examId": 102,
       "text": "How do you select an element with the class 'button' in CSS?",
-      "options": [
-        "#button",
-        ".button",
-        "button",
-        "*button"
-      ],
-      "correctAnswer": 1
+      "options": ["#button", ".button", "button", "*button"],
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
     {
       "id": "15",
       "examId": 102,
       "text": "Which CSS property is used to change the font of an element?",
-      "options": [
-        "font-family",
-        "font-style",
-        "font-weight",
-        "font"
-      ],
-      "correctAnswer": 0
+      "options": ["font-family", "font-style", "font-weight", "font"],
+      "correctAnswer": 0,
+      "difficulty": "m"
     },
     {
       "id": "16",
       "examId": 102,
       "text": "What is the default position value for an HTML element?",
-      "options": [
-        "static",
-        "relative",
-        "absolute",
-        "fixed"
-      ],
-      "correctAnswer": 0
+      "options": ["static", "relative", "absolute", "fixed"],
+      "correctAnswer": 0,
+      "difficulty": "e"
     },
     {
       "id": "17",
       "examId": 102,
       "text": "Which property is used to create space between the element's content and its border?",
-      "options": [
-        "margin",
-        "padding",
-        "border-spacing",
-        "spacing"
-      ],
-      "correctAnswer": 1
+      "options": ["margin", "padding", "border-spacing", "spacing"],
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
     {
       "id": "18",
       "examId": 102,
       "text": "Which CSS property is used to make text bold?",
-      "options": [
-        "font-style",
-        "font-weight",
-        "text-style",
-        "font-bold"
-      ],
-      "correctAnswer": 1
+      "options": ["font-style", "font-weight", "text-style", "font-bold"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "19",
       "examId": 102,
       "text": "Which CSS property is used to control the stacking order of elements?",
-      "options": [
-        "stack",
-        "z-index",
-        "order",
-        "position"
-      ],
-      "correctAnswer": 1
+      "options": ["stack", "z-index", "order", "position"],
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
     {
       "id": "20",
       "examId": 102,
       "text": "Which CSS unit is relative to the font size of the root element?",
-      "options": [
-        "em",
-        "rem",
-        "%",
-        "px"
-      ],
-      "correctAnswer": 1
+      "options": ["em", "rem", "%", "px"],
+      "correctAnswer": 1,
+      "difficulty": "e"
     },
     {
       "id": "21",
       "examId": 201,
       "text": "Which attribute is used to define inline CSS styles?",
-      "options": [
-        "class",
-        "id",
-        "style",
-        "css"
-      ],
-      "correctAnswer": 2
+      "options": ["class", "id", "style", "css"],
+      "correctAnswer": 2,
+      "difficulty": "e"
     },
     {
       "id": "22",
       "examId": 201,
       "text": "Which HTML5 element is used to define navigation links?",
-      "options": [
-        "<nav>",
-        "<section>",
-        "<header>",
-        "<aside>"
-      ],
-      "correctAnswer": 0
+      "options": ["<nav>", "<section>", "<header>", "<aside>"],
+      "correctAnswer": 0,
+      "difficulty": "m"
     },
     {
       "id": "23",
@@ -347,19 +326,16 @@
         "To structure forms",
         "To define metadata for content"
       ],
-      "correctAnswer": 1
+      "correctAnswer": 1,
+      "difficulty": "h"
     },
     {
       "id": "24",
       "examId": 201,
       "text": "Which CSS property is used to create a flexible layout?",
-      "options": [
-        "flex",
-        "display",
-        "float",
-        "grid"
-      ],
-      "correctAnswer": 1
+      "options": ["flex", "display", "float", "grid"],
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
     {
       "id": "25",
@@ -371,79 +347,340 @@
         "The spacing between elements",
         "The alignment of text"
       ],
-      "correctAnswer": 1
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
     {
       "id": "26",
       "examId": 201,
       "text": "Which CSS property is used to create animations?",
-      "options": [
-        "animation",
-        "transform",
-        "transition",
-        "keyframes"
-      ],
-      "correctAnswer": 0
+      "options": ["animation", "transform", "transition", "keyframes"],
+      "correctAnswer": 0,
+      "difficulty": "h"
     },
     {
       "id": "27",
       "examId": 201,
-      "text": "Which pseudo-class is used to style an element when it has keyboard focus?",
+      "text": "What is the difference between `display: block` and `display: inline` in CSS?",
       "options": [
-        ":hover",
-        ":focus",
-        ":active",
-        ":visited"
+        "Block elements take up the full width, while inline elements only take up as much space as needed",
+        "Inline elements take up the full width, while block elements only take up as much space as needed",
+        "Block elements can have padding and margins, while inline elements cannot",
+        "Inline elements cannot have any styles applied to them"
       ],
-      "correctAnswer": 1
+      "correctAnswer": 0,
+      "difficulty": "h"
     },
     {
       "id": "28",
       "examId": 201,
-      "text": "What is the difference between `relative` and `absolute` positioning in CSS?",
-      "options": [
-        "Relative positions an element based on the viewport, while absolute positions it relative to its closest positioned ancestor.",
-        "Relative positions an element relative to its normal position, while absolute positions it based on the viewport.",
-        "Relative and absolute are the same in CSS.",
-        "Relative positions an element based on the viewport, while absolute positions it relative to its sibling elements."
-      ],
-      "correctAnswer": 1
+      "text": "Which HTML element is used to embed a video file?",
+      "options": ["<video>", "<media>", "<movie>", "<embed>"],
+      "correctAnswer": 0,
+      "difficulty": "m"
     },
     {
       "id": "29",
       "examId": 201,
-      "text": "Which CSS function is used to rotate an element?",
-      "options": [
-        "rotate()",
-        "skew()",
-        "translate()",
-        "transform()"
-      ],
-      "correctAnswer": 0
+      "text": "Which CSS property is used to change the width of an element?",
+      "options": ["width", "size", "height", "length"],
+      "correctAnswer": 0,
+      "difficulty": "e"
     },
     {
       "id": "30",
       "examId": 201,
-      "text": "What does the `media` attribute in a `<link>` tag specify?",
+      "text": "What is the purpose of the `@media` rule in CSS?",
       "options": [
-        "The type of content the link references",
-        "The type of file being linked",
-        "The device or condition the stylesheet is applied to",
-        "The title of the linked document"
+        "To add custom fonts to a page",
+        "To define styles for specific screen sizes or device types",
+        "To animate elements on the page",
+        "To create print styles"
       ],
-      "correctAnswer": 2
+      "correctAnswer": 1,
+      "difficulty": "m"
     },
+
     {
       "id": "31",
-      "examId": 201,
-      "text": "What is the difference between `em` and `rem` units in CSS?",
+      "examId": 101,
+      "text": "Which tag is used to create a table in HTML?",
+      "options": ["<table>", "<tb>", "<tr>", "<grid>"],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "32",
+      "examId": 101,
+      "text": "Which tag is used to define an unordered list?",
+      "options": ["<ul>", "<ol>", "<list>", "<dir>"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "33",
+      "examId": 102,
+      "text": "Which property is used to control the text alignment in CSS?",
+      "options": ["text-align", "align-text", "text-position", "text-center"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "34",
+      "examId": 102,
+      "text": "What is the purpose of the `display: none` property in CSS?",
       "options": [
-        "`em` is relative to the font size of its parent, while `rem` is relative to the font size of the root element.",
-        "`em` is absolute, while `rem` is relative to its parent element.",
-        "`em` is used for margins, while `rem` is used for font sizes.",
-        "`em` is relative to the viewport, while `rem` is relative to its container."
+        "It hides an element without removing it from the layout",
+        "It hides an element and removes it from the layout",
+        "It displays the element as a block",
+        "It allows elements to be displayed only when hovered"
       ],
-      "correctAnswer": 0
+      "correctAnswer": 1,
+      "difficulty": "m"
+    },
+    {
+      "id": "35",
+      "examId": 201,
+      "text": "Which HTML5 element is used to define the main content of a page?",
+      "options": ["<section>", "<header>", "<footer>", "<main>"],
+      "correctAnswer": 3,
+      "difficulty": "e"
+    },
+    {
+      "id": "36",
+      "examId": 201,
+      "text": "Which property is used to change the text size in CSS?",
+      "options": ["font-size", "text-size", "size", "font-style"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "37",
+      "examId": 201,
+      "text": "Which HTML element is used to define a form?",
+      "options": ["<input>", "<form>", "<button>", "<select>"],
+      "correctAnswer": 1,
+      "difficulty": "e"
+    },
+    {
+      "id": "38",
+      "examId": 201,
+      "text": "Which CSS property is used to set the background image of an element?",
+      "options": [
+        "background-image",
+        "background",
+        "image-background",
+        "bg-img"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "39",
+      "examId": 201,
+      "text": "Which tag is used to embed a sound file in HTML?",
+      "options": ["<audio>", "<sound>", "<music>", "<mp3>"],
+      "correctAnswer": 0,
+      "difficulty": "h"
+    },
+    {
+      "id": "40",
+      "examId": 201,
+      "text": "Which of the following is a valid color code in CSS?",
+      "options": ["#fff", "white", "rgb(255, 255, 255)", "all of the above"],
+      "correctAnswer": 3,
+      "difficulty": "e"
+    },
+
+    {
+      "id": "31",
+      "examId": 101,
+      "text": "Which tag is used to create a table in HTML?",
+      "options": ["<table>", "<tb>", "<tr>", "<grid>"],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "32",
+      "examId": 101,
+      "text": "Which tag is used to define an unordered list?",
+      "options": ["<ul>", "<ol>", "<list>", "<dir>"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "33",
+      "examId": 102,
+      "text": "Which property is used to control the text alignment in CSS?",
+      "options": ["text-align", "align-text", "text-position", "text-center"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "34",
+      "examId": 102,
+      "text": "What is the purpose of the `display: none` property in CSS?",
+      "options": [
+        "It hides an element without removing it from the layout",
+        "It hides an element and removes it from the layout",
+        "It displays the element as a block",
+        "It allows elements to be displayed only when hovered"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "m"
+    },
+    {
+      "id": "35",
+      "examId": 201,
+      "text": "Which HTML5 element is used to define the main content of a page?",
+      "options": ["<section>", "<header>", "<footer>", "<main>"],
+      "correctAnswer": 3,
+      "difficulty": "e"
+    },
+    {
+      "id": "36",
+      "examId": 201,
+      "text": "Which property is used to change the text size in CSS?",
+      "options": ["font-size", "text-size", "size", "font-style"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "37",
+      "examId": 201,
+      "text": "Which HTML element is used to define a form?",
+      "options": ["<input>", "<form>", "<button>", "<select>"],
+      "correctAnswer": 1,
+      "difficulty": "e"
+    },
+    {
+      "id": "38",
+      "examId": 201,
+      "text": "Which CSS property is used to set the background image of an element?",
+      "options": [
+        "background-image",
+        "background",
+        "image-background",
+        "bg-img"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "39",
+      "examId": 201,
+      "text": "Which tag is used to embed a sound file in HTML?",
+      "options": ["<audio>", "<sound>", "<music>", "<mp3>"],
+      "correctAnswer": 0,
+      "difficulty": "h"
+    },
+    {
+      "id": "40",
+      "examId": 201,
+      "text": "Which of the following is a valid color code in CSS?",
+      "options": ["#fff", "white", "rgb(255, 255, 255)", "all of the above"],
+      "correctAnswer": 3,
+      "difficulty": "e"
+    },
+    {
+      "id": "41",
+      "examId": 101,
+      "text": "Which tag is used to create a form in HTML?",
+      "options": ["<form>", "<input>", "<button>", "<select>"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "42",
+      "examId": 101,
+      "text": "What does the `alt` attribute in an `<img>` tag define?",
+      "options": [
+        "The alternative text for the image",
+        "The alignment of the image",
+        "The size of the image",
+        "The source of the image"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "43",
+      "examId": 102,
+      "text": "Which CSS property is used to make text italic?",
+      "options": ["font-style", "text-style", "font-weight", "text-align"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "44",
+      "examId": 102,
+      "text": "Which CSS property is used to adjust the space between letters in text?",
+      "options": [
+        "letter-spacing",
+        "word-spacing",
+        "line-height",
+        "text-indent"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "45",
+      "examId": 201,
+      "text": "Which HTML5 element is used to define the header of a document?",
+      "options": ["<header>", "<footer>", "<nav>", "<section>"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "46",
+      "examId": 201,
+      "text": "Which CSS property is used to set the transparency of an element?",
+      "options": ["opacity", "visibility", "transparency", "display"],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "47",
+      "examId": 201,
+      "text": "Which HTML5 element is used to define a footer for a document?",
+      "options": ["<footer>", "<header>", "<aside>", "<article>"],
+      "correctAnswer": 0,
+      "difficulty": "e"
+    },
+    {
+      "id": "48",
+      "examId": 201,
+      "text": "Which property is used to create a rounded border in CSS?",
+      "options": [
+        "border-radius",
+        "border-style",
+        "border-width",
+        "border-color"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "49",
+      "examId": 201,
+      "text": "What is the purpose of the `overflow` property in CSS?",
+      "options": [
+        "It defines how content overflows the element box",
+        "It sets the background color of an element",
+        "It controls the font size of the element",
+        "It defines the spacing around an element"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "m"
+    },
+    {
+      "id": "50",
+      "examId": 201,
+      "text": "Which CSS property is used to create a shadow effect for text?",
+      "options": ["text-shadow", "box-shadow", "shadow", "font-shadow"],
+      "correctAnswer": 0,
+      "difficulty": "h"
     }
   ]
 }

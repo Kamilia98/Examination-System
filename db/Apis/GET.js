@@ -70,10 +70,10 @@ export async function fetchExam(id) {
   }
 }
 
-export async function fetchQuestions(id) {
+export async function fetchQuestions(id, difficulty) {
   try {
     const response = await fetch(
-      `http://localhost:3000/questions?examId=${id}`,
+      `http://localhost:3000/questions?examId=${id}&difficulty=${difficulty}`,
       {
         method: 'GET',
       }
