@@ -30,6 +30,7 @@ loginForm.addEventListener('submit', async (e) => {
           'user',
           JSON.stringify({
             firstName: user.fname,
+            lastName: user.lname,
             id: user.id,
           })
         );

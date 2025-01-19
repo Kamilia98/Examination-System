@@ -76,18 +76,8 @@ signupForm.addEventListener('submit', async (e) => {
       );
 
       if (isExistingUser) {
-        // User already signed up so redirect to login
-        Toastify({
-          text: 'You are already a member!',
-          duration: 1000,
-          gravity: 'top',
-          position: 'center',
-          backgroundColor: 'green',
-        }).showToast();
-
-        setTimeout(() => {
-          window.location.href = '../Login/login.html';
-        }, 1000);
+        // User already signed up so show message
+        errors.email.textContent = 'This Email already exists.';
       } else {
         // Create new user
         const newUser = {
@@ -107,10 +97,14 @@ signupForm.addEventListener('submit', async (e) => {
         // Add to LocalStorage to indicate Logged in user
         localStorage.setItem(
           'user',
-          JSON.stringify({ firstName: inputs.fName.value, id: newUser.id })
+          JSON.stringify({
+            firstName: inputs.fName.value,
+            lastName: inputs.lName.value,
+            id: newUser.id,
+          })
         );
-        //Redirect to home passing the userId
-        window.location.href = `../Home/home.html?userId=${newUser.id}`;
+        // Redirect to home passing the userId
+        location.href = `../Login/login.html`;
       }
     } catch (error) {
       console.error('Error during sign-up process:', error);

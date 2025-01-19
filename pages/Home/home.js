@@ -1,66 +1,106 @@
 import { fetchUser, fetchExam } from '../../db/Apis/GET.js';
 
-// First name to be used later
+// Fetch and display user details
 const { firstName } = JSON.parse(localStorage.getItem('user'));
+document.getElementById('welcomeText').textContent = `Welcome, ${firstName}`;
 
-//User Id
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId');
-console.log(userId);
+// Extract user ID from URL
+const userId = new URLSearchParams(window.location.search).get('userId');
 
-// Logout btn Event listener
+// Logout functionality
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.clear();
-  location.href = '../../index.html';
+  location.href = '../Login/login.html';
 });
 
-// Initialize user Data
+// Fetch user data and display exams
 (async function getUser() {
-  const [user] = await fetchUser(userId);
+  const user =
+    JSON.parse(localStorage.getItem('userData')) ||
+    (await fetchUser(userId))[0];
   displayExams(user.exams);
 })();
 
-function displayExams(userExams) {
+// Display exams in the UI
+async function displayExams(userExams) {
   const examsContainer = document.querySelector('#exams');
+  examsContainer.innerHTML = ''; // Clear existing content
 
-  // Show exams
-  userExams.map(async (userExam) => {
-    const [exam] = await fetchExam(userExam.examId);
+  const examElements = await Promise.all(userExams.map(createExamElement));
+  examElements.forEach((examElement) =>
+    examsContainer.appendChild(examElement)
+  );
 
-    const examElement = document.createElement('div');
-    const examTitle = document.createElement('div');
-    examTitle.innerHTML = exam.title;
-    examElement.appendChild(examTitle);
+  addButtonsEventlisteners(); // Attach event listeners after exams are rendered
+}
 
-    console.log(userExam.status); // Ensure you're logging the correct property
+// Create exam element
+async function createExamElement(userExam) {
+  const exam = await fetchExam(userExam.examId).then((exams) => exams[0]);
+  const examElement = document.createElement('div');
+  const examTitle = document.createElement('div');
+  examTitle.innerHTML = exam.title;
+  examElement.appendChild(examTitle);
 
-    // Apply styles based on userExam status
-    if (userExam.status === 'success') {
-      examElement.style.color = 'green'; // Green for success
-      // Optionally append the score if available
-      if (userExam.score !== null) {
-        const scoreElement = document.createElement('span');
-        scoreElement.textContent = `Score: ${userExam.score}`;
-        examElement.appendChild(scoreElement);
-      }
-    } else if (userExam.status === 'fail') {
-      // Corrected this condition
-      examElement.style.color = 'red'; // Red for fail
-      // Optionally append the score if available
-      if (userExam.score !== null) {
-        const scoreElement = document.createElement('span');
-        scoreElement.textContent = `Score: ${userExam.score}`;
-        examElement.appendChild(scoreElement);
-      }
-    } else {
-      // Status is neither success nor fail; provide a link to start the exam
-      const examLink = document.createElement('a');
-      examLink.textContent = 'Start Exam';
-      examLink.href = `../Exam/exam.html?userId=${userId}&examId=${userExam.examId}`;
-      examElement.appendChild(examLink);
+  // Add difficulty select if exam status is pending
+  if (userExam.status === 'pending') {
+    examElement.appendChild(createDifficultySelect());
+    examElement.appendChild(createStartButton(userExam.examId, exam.title));
+  } else {
+    examElement.style.color = userExam.status === 'success' ? 'green' : 'red';
+    if (userExam.score !== null) {
+      const scoreElement = document.createElement('span');
+      scoreElement.textContent = `Score: ${userExam.score}`;
+      examElement.appendChild(scoreElement);
     }
+  }
 
-    // Append the exam element to the container
-    examsContainer.appendChild(examElement);
+  return examElement;
+}
+
+// Create difficulty select dropdown
+function createDifficultySelect() {
+  const select = document.createElement('select');
+  const options = ['Easy', 'Medium', 'Hard'].map((level, index) => {
+    const option = document.createElement('option');
+    option.value = ['e', 'm', 'h'][index];
+    option.textContent = level;
+    return option;
+  });
+  select.append(...options);
+  select.value = 'm'; // Default difficulty
+  return select;
+}
+
+// Create 'Start Exam' button
+function createStartButton(examId, examTitle) {
+  const button = document.createElement('button');
+  button.classList.add('btn', 'btn-primary', 'startBtn');
+  button.textContent = 'Start Exam';
+  button.dataset.exam = examId;
+  button.dataset.bsToggle = 'modal';
+  button.dataset.bsTarget = '#exampleModal';
+  button.dataset.examTitle = examTitle;
+  return button;
+}
+
+// Add event listeners to start exam buttons
+function addButtonsEventlisteners() {
+  const modalTitle = document.getElementById('exampleModalLabel');
+  const modalBody = document.querySelector('.modal-body');
+  const confirmButton = document.getElementById('confirmButton');
+
+  document.querySelectorAll('.startBtn').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const { exam, examTitle } = e.target.dataset;
+      const difficulty = e.target.previousElementSibling.value; // Get selected difficulty
+
+      modalTitle.textContent = `Start Exam: ${examTitle}`;
+      modalBody.innerHTML = `<p>Are you sure you want to start the exam?</p><p>Difficulty: ${difficulty}</p>`;
+
+      confirmButton.onclick = () => {
+        window.location.href = `../Exam/exam.html?userId=${userId}&examId=${exam}&difficulty=${difficulty}`;
+      };
+    });
   });
 }
