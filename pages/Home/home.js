@@ -2,13 +2,13 @@ import { fetchUser, fetchExam } from '../../db/Apis/GET.js';
 
 // Fetch and display user details
 const { firstName } = JSON.parse(localStorage.getItem('user'));
-document.getElementById('welcomeText').textContent = `Welcome, ${firstName}`;
+document.querySelector('#welcomeText').textContent = `Welcome, ${firstName}`;
 
 // Extract user ID from URL
 const userId = new URLSearchParams(window.location.search).get('userId');
 
 // Logout functionality
-document.getElementById('logoutBtn').addEventListener('click', () => {
+document.querySelector('#logoutBtn').addEventListener('click', () => {
   localStorage.clear();
   location.href = '../Login/login.html';
 });
@@ -86,9 +86,9 @@ function createStartButton(examId, examTitle) {
 
 // Add event listeners to start exam buttons
 function addButtonsEventlisteners() {
-  const modalTitle = document.getElementById('exampleModalLabel');
+  const modalTitle = document.querySelector('#exampleModalLabel');
   const modalBody = document.querySelector('.modal-body');
-  const confirmButton = document.getElementById('confirmButton');
+  const confirmButton = document.querySelector('#confirmButton');
 
   document.querySelectorAll('.startBtn').forEach((button) => {
     button.addEventListener('click', (e) => {
