@@ -1,46 +1,60 @@
 import { fetchUser } from '../../db/Apis/GET.js';
 import { updateUserExam } from '../../db/Apis/POST.js';
 
+// Retrieve user and exam data
 const { firstName } = JSON.parse(localStorage.getItem('user'));
+const { userId, examId, score } = Object.fromEntries(
+  new URLSearchParams(window.location.search).entries()
+);
 
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId');
-const examId = urlParams.get('examId');
-const score = Number(urlParams.get('score'));
+// DOM Elements
+const resultItem = document.querySelector('#result');
+const homeBtn = document.querySelector('#homeBtn');
 
-const resultItem = document.getElementById('result');
-const homeBtn = document.getElementById('homeBtn');
-let status;
-if (score == -1) {
-  resultItem.textContent = `time outtttttttttttttt, ${firstName}`;
-  status = 'fail';
-} else if (score < 50) {
-  resultItem.textContent = `you failedddddddddddddd, ${firstName}`;
-  status = 'fail';
-} else if (score == 100) {
-  resultItem.textContent = `You got fulllllll scoreeee, ${firstName}`;
-  status = 'success';
-} else {
-  resultItem.textContent = 'You passed';
-  status = 'success';
-}
+// Determine exam result and status
+const getStatusMessage = (score, name) => {
+  console.log(score);
+  if (score == -1) {
+    return { message: `Time out, ${name}`, status: 'fail' };
+  }
+  if (score < 50) {
+    return { message: `You failed, ${name}`, status: 'fail' };
+  }
+  if (score == 100) {
+    return { message: `You got a full score, ${name}!`, status: 'success' };
+  }
+  return { message: `You passed, ${name}!`, status: 'success' };
+};
 
+const { message, status } = getStatusMessage(score, firstName);
+resultItem.textContent = message;
+
+// Event Listener: Update user exam and navigate to home
 homeBtn.addEventListener('click', async () => {
   const updatedExamData = {
     examId: Number(examId),
     status,
-    score, // Example updated score
+    score,
   };
-  const u = localStorage.getItem('userData');
-  let user;
-  if (u) {
-    user = JSON.parse(u);
-  } else {
+
+  let user = JSON.parse(localStorage.getItem('userData'));
+  if (!user) {
     [user] = await fetchUser(userId);
   }
-  const examsIndex = user.exams.findIndex((exam) => exam.examId == examId);
-  user.exams[examsIndex] = updatedExamData;
+  // Update user's exam data
+  const examsIndex = user.exams.findIndex(
+    (exam) => exam.examId === Number(examId)
+  );
+  if (examsIndex !== -1) {
+    user.exams[examsIndex] = updatedExamData;
+  } else {
+    user.exams.push(updatedExamData);
+  }
+
+  // Save updated user data and send to backend
   localStorage.setItem('userData', JSON.stringify(user));
-  updateUserExam(userId, examId, updatedExamData);
+  await updateUserExam(userId, examId, updatedExamData);
+
+  // Redirect to home page
   location.href = `../Home/home.html?userId=${userId}`;
 });

@@ -1,17 +1,17 @@
 import { fetchUsers } from '../../db/Apis/GET.js';
 import { createUser } from '../../db/Apis/POST.js';
 
-const signupForm = document.getElementById('signupForm');
+const signupForm = document.querySelector('#signupForm');
 
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const inputs = {
-    fName: document.getElementById('fNameInput'),
-    lName: document.getElementById('lNameInput'),
-    email: document.getElementById('emailInput'),
-    password: document.getElementById('passwordInput'),
-    confirmPassword: document.getElementById('confirmPasswordInput'),
+    fName: document.querySelector('#fNameInput'),
+    lName: document.querySelector('#lNameInput'),
+    email: document.querySelector('#emailInput'),
+    password: document.querySelector('#passwordInput'),
+    confirmPassword: document.querySelector('#confirmPasswordInput'),
   };
 
   const errors = {

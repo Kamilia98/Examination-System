@@ -1,169 +1,97 @@
 import { fetchExam, fetchQuestions } from '../../db/Apis/GET.js';
 
-// Extract exam ID from URL parameters
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId');
-const examId = urlParams.get('examId');
-const difficulty = urlParams.get('difficulty');
+// Extract exam ID, user ID, and difficulty from URL parameters
+const { userId, examId, difficulty } = Object.fromEntries(
+  new URLSearchParams(window.location.search).entries()
+);
 
-// DOM elements
+// DOM Elements
 const prevBtn = document.querySelector('#prevBtn');
 const nextBtn = document.querySelector('#nextBtn');
-const questionItem = document.querySelector('.question');
+const submitBtn = document.querySelector('#submitBtn');
+const flagBtn = document.querySelector('#flagBtn');
 const questionNoItem = document.querySelector('#questionNo');
+const markedQuestionsContainer = document.querySelector('#markedQuestions');
 
 let questions = [];
 let exam = {};
 let index = 0;
 
-// Event listeners for prev and next buttons
-[prevBtn, nextBtn].forEach((btn, direction) => {
+// Event listeners for navigation buttons
+[prevBtn, nextBtn].forEach((btn, direction) =>
   btn.addEventListener('click', () =>
     navigateQuestions(direction === 0 ? -1 : 1)
-  );
-});
+  )
+);
 
-document.getElementById('submitBtn').addEventListener('click', () => {
-  const answers = [];
-  const questionsItems = document.querySelectorAll('.question');
+// Submit exam answers
+submitBtn.addEventListener('click', () => handleSubmit());
 
-  questionsItems.forEach((question, index) => {
-    // Find the selected radio button for this question
-    const selectedOption = question.querySelector(
-      'input[type="radio"]:checked'
-    );
+// Flag question as marked
+flagBtn.addEventListener('click', () => markQuestionAsFlagged());
 
-    if (selectedOption) {
-      // Store the value of the selected option
-      answers.push(selectedOption.value);
-    } else {
-      answers.push(null);
-    }
-  });
-
-  const answeredQuestions = answers.reduce((acc, a) => {
-    if (a != null) {
-      return acc + 1;
-    } else {
-      return acc;
-    }
-  }, 0);
-
-  const modalTitle = document.getElementById('exampleModalLabel');
-  const modalBody = document.querySelector('.modal-body');
-  const confirmButton = document.getElementById('confirmButton'); // Target the confirm button
-
-  modalTitle.textContent = `Start Exam: ${exam.title}`;
-  modalBody.innerHTML = `<p>You answered ${answeredQuestions} of ${questions.length}, Are you sure you want to submit?</p>`;
-
-  // Set the confirm button's behavior
-  confirmButton.onclick = () => {
-    let score = 0;
-    answers.forEach((answer, i) => {
-      if (answer == questions[i].correctAnswer) {
-        score++;
-      }
-    });
-
-    score = ((score / questions.length) * 100).toFixed(2);
-    window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=${score}`;
-  };
-});
-
-document.getElementById('flagBtn').addEventListener('click', () => {
-  const cont = document.getElementById('markedQuestions');
-  const exists = Array.from(cont.querySelectorAll('.markedQuestion')).some(
-    (el) => el.dataset.index == index
-  );
-  if (!exists) {
-    const q = document.createElement('div');
-    q.classList.add('markedQuestion');
-    q.dataset.index = index;
-    const titleEl = document.createElement('div');
-    titleEl.textContent = `question ${index + 1}`;
-    q.appendChild(titleEl);
-    const deletBtn = document.createElement('button');
-    deletBtn.classList.add('deleteBtn');
-    deletBtn.textContent = 'Delete';
-    q.appendChild(deletBtn);
-    cont.appendChild(q);
-  }
-});
-
-document.getElementById('markedQuestions').addEventListener('click', (e) => {
-  if (e.target.classList.contains('deleteBtn')) {
-    e.target.parentElement.remove();
-  } else if (e.target.closest('.markedQuestion')) {
-    index = Number(e.target.closest('.markedQuestion').dataset.index);
-    displayQuestion(index);
-  }
-});
-
-// Fetch questions
-(async function initializeQuestions(examId) {
+// Fetch exam and questions data
+(async function initializeData() {
   try {
     questions = await fetchQuestions(examId, difficulty);
 
     if (questions.length) {
-      // Shuffle the questions array
-      questions = shuffleArray(questions);
-
-      // Append and display questions
+      questions = shuffleArray(questions); // Shuffle questions
       appendQuestions(questions);
-      displayQuestion(0);
-    } else {
-      questionItem.textContent = 'No questions available for this exam.';
+      displayQuestion(0); // Display first question
     }
-  } catch (error) {
-    console.error('Error fetching questions:', error);
-    questionItem.textContent =
-      'Failed to load questions. Please try again later.';
-  }
-})(examId);
 
-// Utility function to shuffle an array (Fisher-Yates Shuffle)
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1)); // Random index
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-  }
-  return array;
-}
-
-(async function getExam(examId) {
-  try {
     [exam] = await fetchExam(examId);
     showTimer(exam.duration * 60);
     showTitle(exam.title);
   } catch (error) {
-    console.error('Error fetching exam:', error);
+    console.error('Error fetching data:', error);
   }
-})(examId);
+})();
 
-function showTimer(examtime = 5 * 60) {
-  const timeEl = document.getElementById('examTime');
-  timeEl.textContent = `${String(Math.floor(examtime / 60)).padStart(
-    2,
-    '0'
-  )}:${String(examtime % 60).padStart(2, '0')}`;
-  examtime--;
+// Shuffle array function (Fisher-Yates Shuffle)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Timer function
+function showTimer(examTime = 5 * 60) {
+  const timeEl = document.querySelector('#examTime');
+  timeEl.textContent = formatTime(examTime);
   setInterval(() => {
-    timeEl.textContent = `${String(Math.floor(examtime / 60)).padStart(
-      2,
-      '0'
-    )}:${String(examtime % 60).padStart(2, '0')}`;
-    examtime--;
-    if (examtime == 0) {
-      location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
+    if (examTime <= 0) {
+      window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
+    } else {
+      timeEl.textContent = formatTime(examTime--);
     }
   }, 1000);
 }
 
-function showTitle(examTitle) {
-  document.getElementById('examTitle').textContent = examTitle;
+function formatTime(seconds) {
+  return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(
+    seconds % 60
+  ).padStart(2, '0')}`;
 }
 
-// Navigate questions
+// Display exam title
+function showTitle(examTitle) {
+  document.querySelector('#examTitle').textContent = examTitle;
+}
+
+// Display question
+function displayQuestion(currentIndex) {
+  const questions = document.querySelectorAll('.question');
+  Array.from(questions).forEach((q, i) => {
+    q.classList.toggle('hidden', i !== currentIndex);
+  });
+  questionNoItem.textContent = `${currentIndex + 1}/${questions.length}`;
+}
+
+// Navigate between questions
 function navigateQuestions(step) {
   const newIndex = index + step;
   if (newIndex >= 0 && newIndex < questions.length) {
@@ -172,19 +100,77 @@ function navigateQuestions(step) {
   }
 }
 
-function appendQuestions(questions) {
-  const questionsContainer = document.getElementById('questions');
-  questions.forEach((question, inx) => {
-    //create question
-    const questionItem = document.createElement('div');
-    questionItem.classList.add('question');
-    questionItem.classList.add('hidden');
-    //question header
-    const questionText = createElement('p', { textContent: question.text });
-    questionItem.appendChild(questionText);
+// Handle the submission of the exam
+function handleSubmit() {
+  const answers = [];
+  const questionsItems = document.querySelectorAll('.question');
 
-    //options
+  questionsItems.forEach((question, index) => {
+    const selectedOption = question.querySelector(
+      'input[type="radio"]:checked'
+    );
+    answers.push(selectedOption ? selectedOption.value : null);
+  });
+
+  const answeredQuestions = answers.filter((a) => a !== null).length;
+  const modalTitle = document.querySelector('#exampleModalLabel');
+  const modalBody = document.querySelector('.modal-body');
+  const confirmButton = document.querySelector('#confirmButton');
+
+  modalTitle.textContent = `Start Exam: ${exam.title}`;
+  modalBody.innerHTML = `<p>You answered ${answeredQuestions} of ${questions.length}, Are you sure you want to submit?</p>`;
+
+  confirmButton.onclick = () => {
+    let score = answers.reduce(
+      (score, answer, i) => score + (answer == questions[i].correctAnswer),
+      0
+    );
+    score = ((score / questions.length) * 100).toFixed(2);
+    window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=${score}`;
+  };
+}
+
+// Mark question as flagged
+function markQuestionAsFlagged() {
+  const exists = Array.from(
+    markedQuestionsContainer.querySelectorAll('.markedQuestion')
+  ).some((el) => el.dataset.index == index);
+  if (!exists) {
+    const markedQuestionEl = createElement('div', {
+      className: 'markedQuestion',
+      dataset: { index },
+    });
+    const titleEl = createElement('div', {
+      textContent: `Question ${index + 1}`,
+    });
+    const deleteBtn = createElement('button', {
+      className: 'deleteBtn',
+      textContent: 'Delete',
+    });
+
+    markedQuestionEl.append(titleEl, deleteBtn);
+    markedQuestionsContainer.appendChild(markedQuestionEl);
+  }
+}
+
+// Handle clicks on marked questions list
+markedQuestionsContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('deleteBtn')) {
+    e.target.parentElement.remove();
+  } else if (e.target.closest('.markedQuestion')) {
+    index = Number(e.target.closest('.markedQuestion').dataset.index);
+    displayQuestion(index);
+  }
+});
+
+// Append questions to the DOM
+function appendQuestions(questions) {
+  const questionsContainer = document.querySelector('#questions');
+  questions.forEach((question, inx) => {
+    const questionItem = createElement('div', { className: 'question hidden' });
+    const questionText = createElement('p', { textContent: question.text });
     const optionsList = createElement('ul', { className: 'options' });
+
     question.options.forEach((option, i) => {
       const optionItem = createElement('li');
       const radioInput = createElement('input', {
@@ -197,30 +183,28 @@ function appendQuestions(questions) {
         htmlFor: `option${inx}${i}`,
         textContent: option,
       });
-      questionItem.appendChild(optionsList);
 
       optionItem.append(radioInput, label);
       optionsList.appendChild(optionItem);
     });
 
+    questionItem.append(questionText, optionsList);
     questionsContainer.appendChild(questionItem);
   });
 }
-// Display one question
-function displayQuestion(currentIndex) {
-  const questions = document.getElementsByClassName('question');
-  Array.from(questions).forEach((q, i) => {
-    if (currentIndex == i) {
-      q.classList.remove('hidden');
-    } else {
-      q.classList.add('hidden');
-    }
-  });
-  questionNoItem.textContent = `${currentIndex + 1}/${questions.length}`;
-}
 
+// Utility function to create elements
 function createElement(tag, attributes = {}) {
   const element = document.createElement(tag);
-  Object.assign(element, attributes);
+  for (const [key, value] of Object.entries(attributes)) {
+    if (key === 'dataset') {
+      // Set dataset properties individually
+      for (const [dataKey, dataValue] of Object.entries(value)) {
+        element.dataset[dataKey] = dataValue;
+      }
+    } else {
+      element[key] = value;
+    }
+  }
   return element;
 }

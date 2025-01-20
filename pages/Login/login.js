@@ -1,12 +1,12 @@
 import { fetchUsers } from '../../db/Apis/GET.js';
 
-const loginForm = document.getElementById('loginForm');
+const loginForm = document.querySelector('#loginForm');
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const emailInput = document.getElementById('emailInput');
-  const passwordInput = document.getElementById('passwordInput');
+  const emailInput = document.querySelector('#emailInput');
+  const passwordInput = document.querySelector('#passwordInput');
 
   const emailError = emailInput
     .closest('.form-input')
