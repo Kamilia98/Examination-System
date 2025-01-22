@@ -6,6 +6,7 @@ const { userId, examId, difficulty } = Object.fromEntries(
 );
 
 // DOM Elements
+
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const submitBtn = document.querySelector("#submitBtn");
@@ -21,7 +22,8 @@ let index = 0;
 
 loader.classList.remove("hidden");
 // Event listeners for navigation buttons
-[(prevBtn, nextBtn)].forEach((btn, direction) =>
+
+[prevBtn, nextBtn].forEach((btn, direction) =>
   btn.addEventListener("click", () =>
     navigateQuestions(direction === 0 ? -1 : 1)
   )
@@ -69,13 +71,12 @@ function showTimer(examTime = 5 * 60) {
   timeEl.textContent = formatTime(examTime);
   setInterval(() => {
     if (examTime <= 0) {
-      // window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
       history.replaceState(
         null,
         "",
         `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`
       );
-      window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
+      location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
     } else {
       timeEl.textContent = formatTime(examTime--);
     }
@@ -142,7 +143,7 @@ function handleSubmit() {
       "",
       `../Result/result.html?userId=${userId}&examId=${examId}&score=${score}`
     );
-    window.location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=${score}`;
+    location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=${score}`;
   };
 }
 

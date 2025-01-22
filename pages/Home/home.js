@@ -111,7 +111,7 @@ function addButtonsEventlisteners() {
           "",
           `../Exam/exam.html?userId=${userId}&examId=${exam}&difficulty=${difficulty}`
         );
-        window.location.href = `../Exam/exam.html?userId=${userId}&examId=${exam}&difficulty=${difficulty}`;
+        location.href = `../Exam/exam.html?userId=${userId}&examId=${exam}&difficulty=${difficulty}`;
       };
     });
   });
