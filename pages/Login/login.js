@@ -1,23 +1,23 @@
-import { fetchUsers } from "../../db/Apis/GET.js";
+import { fetchUsers } from '../../db/Apis/GET.js';
 
-const loginForm = document.querySelector("#loginForm");
+const loginForm = document.querySelector('#loginForm');
 
-loginForm.addEventListener("submit", async (e) => {
+loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const emailInput = document.querySelector("#emailInput");
-  const passwordInput = document.querySelector("#passwordInput");
+  const emailInput = document.querySelector('#emailInput');
+  const passwordInput = document.querySelector('#passwordInput');
 
   const emailError = emailInput
-    .closest(".form-input")
-    .querySelector(".error-message");
+    .closest('.form-input')
+    .querySelector('.error-message');
   const passwordError = passwordInput
-    .closest(".form-input")
-    .querySelector(".error-message");
+    .closest('.form-input')
+    .querySelector('.error-message');
 
   // Clear previous error messages
-  emailError.textContent = "";
-  passwordError.textContent = "";
+  emailError.textContent = '';
+  passwordError.textContent = '';
 
   try {
     const users = await fetchUsers();
@@ -27,26 +27,25 @@ loginForm.addEventListener("submit", async (e) => {
       if (user.password === passwordInput.value) {
         // Successful login
         localStorage.setItem(
-          "user",
+          'user',
           JSON.stringify({
             firstName: user.fname,
             lastName: user.lname,
             id: user.id,
           })
         );
-        // window.location.href = `../Home/home.html?userId=${user.id}`;
-        history.replaceState(null, "", `../Home/home.html?userId=${user.id}`);
-        window.location.href = `../Home/home.html?userId=${user.id}`;
+        history.replaceState(null, '', `../Home/home.html?userId=${user.id}`);
+        location.href = `../Home/home.html?userId=${user.id}`;
       } else {
         // Incorrect password
-        passwordError.textContent = "Password is not correct.";
+        passwordError.textContent = 'Password is not correct.';
       }
     } else {
       // Email not found
-      passwordError.textContent = "Email or Password is not correct.";
+      passwordError.textContent = 'Email or Password is not correct.';
     }
   } catch (error) {
-    console.error("Error fetching users:", error);
-    passwordError.textContent = "An error occurred. Please try again later.";
+    console.error('Error fetching users:', error);
+    passwordError.textContent = 'An error occurred. Please try again later.';
   }
 });

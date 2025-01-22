@@ -1,33 +1,33 @@
-import { fetchUsers } from "../../db/Apis/GET.js";
-import { createUser } from "../../db/Apis/POST.js";
+import { fetchUsers } from '../../db/Apis/GET.js';
+import { createUser } from '../../db/Apis/POST.js';
 
-const signupForm = document.querySelector("#signupForm");
+const signupForm = document.querySelector('#signupForm');
 
-signupForm.addEventListener("submit", async (e) => {
+signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const inputs = {
-    fName: document.querySelector("#fNameInput"),
-    lName: document.querySelector("#lNameInput"),
-    email: document.querySelector("#emailInput"),
-    password: document.querySelector("#passwordInput"),
-    confirmPassword: document.querySelector("#confirmPasswordInput"),
+    fName: document.querySelector('#fNameInput'),
+    lName: document.querySelector('#lNameInput'),
+    email: document.querySelector('#emailInput'),
+    password: document.querySelector('#passwordInput'),
+    confirmPassword: document.querySelector('#confirmPasswordInput'),
   };
 
   const errors = {
-    fName: inputs.fName.closest(".form-input").querySelector(".error-message"),
-    lName: inputs.lName.closest(".form-input").querySelector(".error-message"),
-    email: inputs.email.closest(".form-input").querySelector(".error-message"),
+    fName: inputs.fName.closest('.form-input').querySelector('.error-message'),
+    lName: inputs.lName.closest('.form-input').querySelector('.error-message'),
+    email: inputs.email.closest('.form-input').querySelector('.error-message'),
     password: inputs.password
-      .closest(".form-input")
-      .querySelector(".error-message"),
+      .closest('.form-input')
+      .querySelector('.error-message'),
     confirmPassword: inputs.confirmPassword
-      .closest(".form-input")
-      .querySelector(".error-message"),
+      .closest('.form-input')
+      .querySelector('.error-message'),
   };
 
   // Clear previous error messages
-  Object.values(errors).forEach((error) => (error.textContent = ""));
+  Object.values(errors).forEach((error) => (error.textContent = ''));
 
   // Validation functions
   const validateName = (name) => /^[a-zA-Z]{3,20}$/.test(name);
@@ -50,21 +50,21 @@ signupForm.addEventListener("submit", async (e) => {
   // Display validation errors
   if (!validationResults.fName) {
     errors.fName.textContent =
-      "First name must be 3-20 characters and only letters.";
+      'First name must be 3-20 characters and only letters.';
   }
   if (!validationResults.lName) {
     errors.lName.textContent =
-      "Last name must be 3-20 characters and only letters.";
+      'Last name must be 3-20 characters and only letters.';
   }
   if (!validationResults.email) {
-    errors.email.textContent = "Invalid email format.";
+    errors.email.textContent = 'Invalid email format.';
   }
   if (!validationResults.password) {
     errors.password.textContent =
-      "Password must be at least 8 characters, include a number, an uppercase, and a lowercase letter.";
+      'Password must be at least 8 characters, include a number, an uppercase, and a lowercase letter.';
   }
   if (!validationResults.confirmPassword) {
-    errors.confirmPassword.textContent = "Passwords do not match.";
+    errors.confirmPassword.textContent = 'Passwords do not match.';
   }
 
   // Proceed only if all validations pass
@@ -77,7 +77,7 @@ signupForm.addEventListener("submit", async (e) => {
 
       if (isExistingUser) {
         // User already signed up so show message
-        errors.email.textContent = "This Email already exists.";
+        errors.email.textContent = 'This Email already exists.';
       } else {
         // Create new user
         const newUser = {
@@ -87,16 +87,16 @@ signupForm.addEventListener("submit", async (e) => {
           email: inputs.email.value,
           password: inputs.password.value,
           exams: [
-            { examId: 101, status: "pending", score: null },
-            { examId: 102, status: "pending", score: null },
-            { examId: 201, status: "pending", score: null },
+            { examId: 101, status: 'pending', score: null },
+            { examId: 102, status: 'pending', score: null },
+            { examId: 201, status: 'pending', score: null },
           ],
         };
         // POST to db
         await createUser(newUser);
         // Add to LocalStorage to indicate Logged in user
         localStorage.setItem(
-          "user",
+          'user',
           JSON.stringify({
             firstName: inputs.fName.value,
             lastName: inputs.lName.value,
@@ -105,11 +105,11 @@ signupForm.addEventListener("submit", async (e) => {
         );
         // Redirect to home passing the userId
         // location.href = `../Login/login.html`;
-        history.replaceState(null, "", `../Login/login.html`);
+        history.replaceState(null, '', `../Login/login.html`);
         location.href = `../Login/login.html`;
       }
     } catch (error) {
-      console.error("Error during sign-up process:", error);
+      console.error('Error during sign-up process:', error);
     }
   }
 });
