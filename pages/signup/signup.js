@@ -1,6 +1,7 @@
 import { fetchUsers } from "../../db/Apis/GET.js";
 import { createUser } from "../../db/Apis/POST.js";
-
+const loader = document.getElementById("loader");
+const page = document.getElementById("page");
 const signupForm = document.querySelector("#signupForm");
 
 signupForm.addEventListener("submit", async (e) => {
@@ -70,6 +71,8 @@ signupForm.addEventListener("submit", async (e) => {
   // Proceed only if all validations pass
   if (Object.values(validationResults).every(Boolean)) {
     try {
+      loader.classList.remove("hidden");
+      page.classList.add("hidden");
       const users = await fetchUsers();
       const isExistingUser = users.some(
         (user) => user.email === inputs.email.value
@@ -103,6 +106,8 @@ signupForm.addEventListener("submit", async (e) => {
             id: newUser.id,
           })
         );
+        loader.classList.add("hidden");
+        page.classList.remove("hidden");
         // Redirect to home passing the userId
         // location.href = `../Login/login.html`;
         history.replaceState(null, "", `../Login/login.html`);

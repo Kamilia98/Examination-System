@@ -12,13 +12,16 @@ const submitBtn = document.querySelector("#submitBtn");
 const flagBtn = document.querySelector("#flagBtn");
 const questionNoItem = document.querySelector("#questionNo");
 const markedQuestionsContainer = document.querySelector("#markedQuestions");
+const loader = document.getElementById("loader");
+const page = document.getElementById("page");
 
 let questions = [];
 let exam = {};
 let index = 0;
 
+loader.classList.remove("hidden");
 // Event listeners for navigation buttons
-[prevBtn, nextBtn].forEach((btn, direction) =>
+[(prevBtn, nextBtn)].forEach((btn, direction) =>
   btn.addEventListener("click", () =>
     navigateQuestions(direction === 0 ? -1 : 1)
   )
@@ -44,6 +47,8 @@ flagBtn.addEventListener("click", () => markQuestionAsFlagged());
     [exam] = await fetchExam(examId);
     showTimer(exam.duration * 60);
     showTitle(exam.title);
+    loader.classList.add("hidden");
+    page.classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching data:", error);
   }

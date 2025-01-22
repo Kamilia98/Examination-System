@@ -106,7 +106,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": "6",
       "fname": "ghadaaaaaaaa",
       "lname": "harbbbbbbbb",
       "email": "ghjklll@gggg.com",
@@ -119,13 +119,13 @@
         },
         {
           "examId": 102,
-          "status": "pending",
-          "score": null
+          "status": "fail",
+          "score": "0.00"
         },
         {
           "examId": 201,
-          "status": "pending",
-          "score": null
+          "status": "fail",
+          "score": "0.00"
         }
       ]
     }

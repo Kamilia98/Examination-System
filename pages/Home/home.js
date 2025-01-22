@@ -1,6 +1,11 @@
 import { fetchUser, fetchExam } from "../../db/Apis/GET.js";
+const loader = document.getElementById("loader");
+const page = document.getElementById("page");
+const logoutBtn = document.getElementById("logoutBtn");
 
 // Fetch and display user details
+loader.classList.remove("hidden");
+// page.classList.add("hidden");
 const { firstName } = JSON.parse(localStorage.getItem("user"));
 document.querySelector("#welcomeText").textContent = `Welcome, ${firstName}`;
 
@@ -55,7 +60,8 @@ async function createExamElement(userExam) {
       examElement.appendChild(scoreElement);
     }
   }
-
+  loader.classList.add("hidden");
+  page.classList.remove("hidden");
   return examElement;
 }
 
