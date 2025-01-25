@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create a new account to access our services. Sign up now to get started."
+    />
+    <title>Registration</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yoruka&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="swapper"></section>
+      <section class="login active">
+        <h1>Login</h1>
+        <form action="home.html" id="loginForm">
+          <div class="form-input">
+            <label for="emailInput">Email</label>
+            <input type="text" id="emailInput" />
+            <span class="error-message"></span>
+          </div>
+          <div class="form-input">
+            <label for="passwordInput">Password</label>
+            <div class="password-input">
+              <input type="password" id="passwordInput" />
+              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+            </div>
+            <span class="error-message">Password is not correct.</span>
+          </div>
+          <button type="submit">Submit</button>
+          <span class="error-message" aria-live="polite"
+            >Email or Password is not correct.</span
+          >
+        </form>
+        <div class="navigate">
+          <span>Don't have account?</span>
+          <!-- <a href="../Signup/signup.html">Start for free</a> -->
+          <button id="goToSignup">Start for free</button>
+        </div>
+      </section>
+      <section class="signup">
+        <h1>Create account</h1>
+        <form action="home.html" id="signupForm" aria-label="Sign Up Form">
+          <div class="form-input">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" />
+            <span class="error-message" aria-live="polite">
+              First name must be 3-20 characters and only letters.
+            </span>
+          </div>
+          <div class="form-input">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" />
+            <span class="error-message" aria-live="polite">
+              Last name must be 3-20 characters and only letters.
+            </span>
+          </div>
+          <div class="form-input">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
+            <span class="error-message" aria-live="polite">
+              Invalid email format.
+            </span>
+          </div>
+          <div class="form-input">
+            <label for="password">Password</label>
+            <div class="password-input">
+              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+              <input type="password" id="password" name="password" />
+            </div>
+            <span class="error-message" aria-live="polite">
+              Password: 8+ chars, number, uppercase &amp; lowercase.
+            </span>
+          </div>
+          <div class="form-input">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="password-input">
+              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+              />
+            </div>
+            <span class="error-message" aria-live="polite">
+              Passwords do not match.
+            </span>
+          </div>
+
+          <button type="submit">Submit</button>
+          <span class="error-message" aria-live="polite"></span>
+        </form>
+        <div class="navigate">
+          <span>Already have an account?</span>
+          <button id="goToLogin">Login</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="signup.js"></script>
+    <script type="module" src="login.js"></script>
+    <script type="module" src="navigate.js"></script>
+  </body>
+</html>
