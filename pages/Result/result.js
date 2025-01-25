@@ -56,5 +56,6 @@ homeBtn.addEventListener('click', async () => {
   await updateUserExam(userId, examId, updatedExamData);
 
   // Redirect to home page
+  history.replaceState(null, '', `../Home/home.html?userId=${userId}`);
   location.href = `../Home/home.html?userId=${userId}`;
 });

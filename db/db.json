@@ -104,6 +104,30 @@
           "score": null
         }
       ]
+    },
+    {
+      "id": "6",
+      "fname": "ghadaaaaaaaa",
+      "lname": "harbbbbbbbb",
+      "email": "ghjklll@gggg.com",
+      "password": "Ghada123456",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "fail",
+          "score": "0.00"
+        },
+        {
+          "examId": 201,
+          "status": "fail",
+          "score": "0.00"
+        }
+      ]
     }
   ],
   "exams": [
