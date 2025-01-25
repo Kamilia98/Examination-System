@@ -6,7 +6,6 @@ const { userId, examId, difficulty } = Object.fromEntries(
 );
 
 // DOM Elements
-
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const submitBtn = document.querySelector("#submitBtn");
@@ -20,39 +19,43 @@ let questions = [];
 let exam = {};
 let index = 0;
 
+// Show loader initially
 loader.classList.remove("hidden");
-// Event listeners for navigation buttons
 
-[prevBtn, nextBtn].forEach((btn, direction) =>
-  btn.addEventListener("click", () =>
-    navigateQuestions(direction === 0 ? -1 : 1)
-  )
-);
+// Event listeners for navigation buttons
+prevBtn.addEventListener("click", () => navigateQuestions(-1));
+nextBtn.addEventListener("click", () => navigateQuestions(1));
 
 // Submit exam answers
-submitBtn.addEventListener("click", () => handleSubmit());
+submitBtn.addEventListener("click", handleSubmit);
 
 // Flag question as marked
-flagBtn.addEventListener("click", () => markQuestionAsFlagged());
+flagBtn.addEventListener("click", markQuestionAsFlagged);
 
-// Fetch exam and questions data
+// Initialize and fetch data
 (async function initializeData() {
   try {
+    // Fetch questions and exam data
     questions = await fetchQuestions(examId, difficulty);
 
     if (questions.length) {
       questions = shuffleArray(questions); // Shuffle questions
-      appendQuestions(questions);
-      displayQuestion(0); // Display first question
+      appendQuestions(questions); // Append questions to DOM
+      displayQuestion(index); // Display first question
     }
 
     [exam] = await fetchExam(examId);
-    showTimer(exam.duration * 60);
     showTitle(exam.title);
+    // Uncomment below if using timer
+    // showTimer(exam.duration * 60);
+
+    // Hide loader and show page content
     loader.classList.add("hidden");
     page.classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching data:", error);
+    // Ensure loader is hidden even if there's an error
+    loader.classList.add("hidden");
   }
 })();
 
@@ -65,10 +68,11 @@ function shuffleArray(array) {
   return array;
 }
 
-// Timer function
+// Display timer
 function showTimer(examTime = 5 * 60) {
   const timeEl = document.querySelector("#examTime");
   timeEl.textContent = formatTime(examTime);
+
   setInterval(() => {
     if (examTime <= 0) {
       history.replaceState(
@@ -97,7 +101,7 @@ function showTitle(examTitle) {
 // Display question
 function displayQuestion(currentIndex) {
   const questions = document.querySelectorAll(".question");
-  Array.from(questions).forEach((q, i) => {
+  questions.forEach((q, i) => {
     q.classList.toggle("hidden", i !== currentIndex);
   });
   questionNoItem.textContent = `${currentIndex + 1}/${questions.length}`;
@@ -112,7 +116,7 @@ function navigateQuestions(step) {
   }
 }
 
-// Handle the submission of the exam
+// Submit exam answers
 function handleSubmit() {
   const answers = [];
   const questionsItems = document.querySelectorAll(".question");
@@ -129,8 +133,8 @@ function handleSubmit() {
   const modalBody = document.querySelector(".modal-body");
   const confirmButton = document.querySelector("#confirmButton");
 
-  modalTitle.textContent = `Start Exam: ${exam.title}`;
-  modalBody.innerHTML = `<p>You answered ${answeredQuestions} of ${questions.length}, Are you sure you want to submit?</p>`;
+  modalTitle.textContent = `Submit Exam: ${exam.title}`;
+  modalBody.innerHTML = `<p>You answered ${answeredQuestions} of ${questions.length}. Are you sure you want to submit?</p>`;
 
   confirmButton.onclick = () => {
     let score = answers.reduce(
@@ -162,7 +166,7 @@ function markQuestionAsFlagged() {
     });
     const deleteBtn = createElement("button", {
       className: "deleteBtn",
-      textContent: "Delete",
+      innerHTML: "<i class='fa-solid fa-trash'></i>",
     });
 
     markedQuestionEl.append(titleEl, deleteBtn);
@@ -170,23 +174,34 @@ function markQuestionAsFlagged() {
   }
 }
 
-// Handle clicks on marked questions list
+// Handle marked question list
 markedQuestionsContainer.addEventListener("click", (e) => {
-  if (e.target.classList.contains("deleteBtn")) {
-    e.target.parentElement.remove();
+  // console.log(e.target.parentElement.classList);
+  if (
+    e.target.parentElement.classList.contains("fa-trash") ||
+    e.target.classList.contains(".deleteBtn")
+  ) {
+    e.target.closest(".markedQuestion").remove();
   } else if (e.target.closest(".markedQuestion")) {
     index = Number(e.target.closest(".markedQuestion").dataset.index);
     displayQuestion(index);
   }
 });
 
-// Append questions to the DOM
+// Append questions to DOM
 function appendQuestions(questions) {
   const questionsContainer = document.querySelector("#questions");
   questions.forEach((question, inx) => {
-    const questionItem = createElement("div", { className: "question hidden" });
-    const questionText = createElement("p", { textContent: question.text });
-    const optionsList = createElement("ul", { className: "options" });
+    const questionItem = createElement("div", {
+      className: "question hidden h-100",
+    });
+    const questionText = createElement("p", {
+      textContent: question.text,
+      className: "fw-bolder fs-5",
+    });
+    const optionsList = createElement("ul", {
+      className: "options list-unstyled ",
+    });
 
     question.options.forEach((option, i) => {
       const optionItem = createElement("li");
@@ -199,6 +214,7 @@ function appendQuestions(questions) {
       const label = createElement("label", {
         htmlFor: `option${inx}${i}`,
         textContent: option,
+        className: "ms-2",
       });
 
       optionItem.append(radioInput, label);
@@ -210,15 +226,14 @@ function appendQuestions(questions) {
   });
 }
 
-// Utility function to create elements
+// Utility to create elements
 function createElement(tag, attributes = {}) {
   const element = document.createElement(tag);
   for (const [key, value] of Object.entries(attributes)) {
     if (key === "dataset") {
-      // Set dataset properties individually
-      for (const [dataKey, dataValue] of Object.entries(value)) {
+      Object.entries(value).forEach(([dataKey, dataValue]) => {
         element.dataset[dataKey] = dataValue;
-      }
+      });
     } else {
       element[key] = value;
     }
