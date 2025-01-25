@@ -10,7 +10,7 @@ const userId = new URLSearchParams(window.location.search).get('userId');
 // Logout functionality
 document.querySelector('#logoutBtn').addEventListener('click', () => {
   localStorage.clear();
-  location.href = '../Login/login.html';
+  location.href = '../Registration/registration.html';
 });
 
 // Fetch user data and display exams
