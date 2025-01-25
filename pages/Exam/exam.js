@@ -47,7 +47,7 @@ flagBtn.addEventListener("click", markQuestionAsFlagged);
     [exam] = await fetchExam(examId);
     showTitle(exam.title);
     // Uncomment below if using timer
-    // showTimer(exam.duration * 60);
+    showTimer(exam.duration * 60);
 
     // Hide loader and show page content
     loader.classList.add("hidden");
