@@ -50,7 +50,7 @@ async function createExamElement(userExam) {
   card.classList.add("col");
   card.innerHTML = `
     <div class="card shadow-sm h-100">
-      <div class="card-body gap-3">
+      <div class="card-body justify-content-around">
         <h5 class="card-title">${exam.title}</h5>
         ${
           userExam.status === "pending"
@@ -64,8 +64,7 @@ async function createExamElement(userExam) {
               </select>
             </div>
             <button
-              class="btn btn-primary startBtn"
-              style="background-color: #074128; border: none"
+              class=" startBtn"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
               data-exam="${userExam.examId}"
@@ -104,7 +103,9 @@ document.addEventListener("click", (e) => {
     // console.log(e.target.closest("div").querySelector("select").value);
 
     modalTitle.textContent = `Start Exam: ${examTitle}`;
-    modalBody.innerHTML = `<p>Are you sure you want to start the exam?</p><p>Difficulty: ${difficulty}</p>`;
+    modalBody.innerHTML = `<p>Are you sure you want to start the exam?</p><p style="color:red;">Difficulty: ${
+      difficulty == "m" ? "meduim" : difficulty == "h" ? "hard" : "easy"
+    }</p>`;
 
     confirmButton.onclick = () => {
       history.replaceState(

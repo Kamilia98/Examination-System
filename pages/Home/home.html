@@ -16,23 +16,46 @@
       rel="stylesheet"
     />
     <style>
-      * {
+      body {
         margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        min-height: 100vh;
+        font-family: "Yoruka", sans-serif;
+        background: url("../../assets/images/Rectangle 1.png") no-repeat top /
+          cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        height: 50px;
+        padding: 8px 12px;
+        border: none;
+        font-family: "Yoruka";
+        background-color: #074128;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
       }
 
-      body {
-        background-color: #f8f9fa;
-        min-height: 100vh;
-        background-image: url("../../assets/images/Rectangle\ 1.png");
+      button:hover {
+        background-color: white;
+        color: #074128;
       }
 
       .loader {
         width: 50px;
         height: 50px;
         border: 8px solid #ddd;
-        border-top-color: #25b09b;
+        border-top-color: #074128;
         border-radius: 50%;
         animation: spin 1s linear infinite;
       }
@@ -72,11 +95,8 @@
       <!-- Page Content -->
       <div id="page" class="hidden">
         <div class="d-flex gap-5 align-items-center mb-4">
-          <button
-            id="logoutBtn"
-            class="btn btn-danger btn-lg shadow-sm rounded-pill"
-          >
-            <i class="fas fa-sign-out-alt me-2"></i> Logout
+          <button id="logoutBtn" class="btn-lg shadow-sm rounded-pill">
+            <i class="fas fa-sign-out-alt me-2"></i>Logout
           </button>
           <h1 id="welcomeText" style="color: #074128">Welcome!</h1>
         </div>
@@ -97,7 +117,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h1
+              class="modal-title fs-3"
+              id="exampleModalLabel"
+              style="color: #074128"
+            ></h1>
             <button
               type="button"
               class="btn-close"
@@ -105,18 +129,16 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">Modal content here...</div>
+          <div class="modal-body"></div>
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              style="background-color: grey"
               data-bs-dismiss="modal"
             >
               Close
             </button>
-            <button id="confirmButton" type="button" class="btn btn-primary">
-              Confirm
-            </button>
+            <button id="confirmButton" type="button" class="">Confirm</button>
           </div>
         </div>
       </div>
