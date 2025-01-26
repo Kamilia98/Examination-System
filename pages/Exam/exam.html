@@ -16,12 +16,14 @@
     />
     <style>
       body {
-        background-color: #f8f9fa;
-        /* background-image: url("https://i.pinimg.com/736x/09/20/98/0920984e7bde6743fb13b7efcb416df8.jpg"); */
-        background-image: url("../../assets/images/Rectangle\ 1.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 100vh;
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Yoruka", sans-serif;
+        background: url("../../assets/images/Rectangle 1.png") no-repeat top /
+          cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       /* Loader styling */
@@ -30,7 +32,7 @@
         padding: 8px;
         aspect-ratio: 1;
         border-radius: 50%;
-        background: #25b09b;
+        background: #074128;
         --_m: conic-gradient(#0000 10%, #000),
           linear-gradient(#000 0 0) content-box;
         -webkit-mask: var(--_m);
@@ -45,27 +47,6 @@
         to {
           transform: rotate(1turn);
         }
-      }
-
-      /* Improved button styling */
-      .btn-custom {
-        padding: 12px 24px;
-        font-size: 1.1rem;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        background-color: #0d6efd;
-        color: #fff;
-        border: none;
-      }
-
-      .btn-custom:hover {
-        background-color: #0b5ed7;
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn-navigation {
-        width: 120px;
       }
 
       .question-container {
@@ -106,7 +87,28 @@
         display: none !important;
       }
       button {
-        background-color: #25b09b !important;
+        height: 50px;
+        border: none;
+        padding: 8px 12px;
+        font-family: "Yoruka";
+        background-color: #074128;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+      }
+
+      button:hover {
+        background-color: white;
+        color: #074128;
       }
       .deleteBtn {
         border: none;
@@ -132,12 +134,14 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  Modal title
-                </h1>
+                <h1
+                  class="modal-title fs-4"
+                  style="color: #074128"
+                  id="exampleModalLabel"
+                ></h1>
                 <button
                   type="button"
-                  class="btn-close bg-transparent"
+                  class="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
@@ -146,16 +150,13 @@
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  class=""
                   data-bs-dismiss="modal"
+                  style="background-color: grey"
                 >
                   Close
                 </button>
-                <button
-                  id="confirmButton"
-                  type="button"
-                  class="btn btn-primary"
-                >
+                <button id="confirmButton" type="button" class="">
                   Confirm
                 </button>
               </div>
@@ -167,7 +168,7 @@
           <h2 id="examTitle" class="text-light">Exam Title</h2>
           <time
             id="examTime"
-            class="fs-5 fw-bolder"
+            class="fs-5 fw-bolder text-light"
             style="color: #074128"
           ></time>
         </div>
@@ -175,13 +176,17 @@
         <div class="row mt-4">
           <!-- Questions Column -->
           <div class="col-lg-8">
-            <div id="questions" class="question-container"></div>
+            <div
+              id="questions"
+              class="question-container"
+              style="height: 220px"
+            ></div>
             <div class="d-flex justify-content-between mt-4">
-              <button id="prevBtn" class="btn btn-custom btn-navigation">
+              <button id="prevBtn" class="">
                 <i class="fas fa-arrow-left"></i> Prev
               </button>
-              <div id="questionNo" class="fs-5 fw-bold">1/10</div>
-              <button id="nextBtn" class="btn btn-custom btn-navigation">
+              <div id="questionNo" class="fs-5 fw-bold text-light">1/10</div>
+              <button id="nextBtn" class="">
                 Next <i class="fas fa-arrow-right"></i>
               </button>
             </div>
@@ -190,7 +195,7 @@
             >
               <button
                 id="submitBtn"
-                class="btn btn-custom"
+                class=""
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -198,8 +203,13 @@
               </button>
               <!-- Flag Button -->
 
-              <button id="flagBtn" class="btn btn-custom">
-                <i class="fas fa-flag"></i> Flag
+              <button
+                id="flagBtn"
+                class="d-flex alifn-items-center justify-content-between"
+                style="width: 80px"
+              >
+                <i class="fas fa-flag"></i>
+                <span> Flag </span>
               </button>
             </div>
           </div>

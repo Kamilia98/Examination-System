@@ -46,7 +46,6 @@ flagBtn.addEventListener("click", markQuestionAsFlagged);
 
     [exam] = await fetchExam(examId);
     showTitle(exam.title);
-    // Uncomment below if using timer
     showTimer(exam.duration * 60);
 
     // Hide loader and show page content
@@ -134,7 +133,11 @@ function handleSubmit() {
   const confirmButton = document.querySelector("#confirmButton");
 
   modalTitle.textContent = `Submit Exam: ${exam.title}`;
-  modalBody.innerHTML = `<p>You answered ${answeredQuestions} of ${questions.length}. Are you sure you want to submit?</p>`;
+  modalBody.innerHTML = `<p>You answered <span style="color:red">
+  
+  ${answeredQuestions} 
+  </span> out
+  of ${questions.length}. Are you sure you want to submit?</p>`;
 
   confirmButton.onclick = () => {
     let score = answers.reduce(
@@ -176,7 +179,6 @@ function markQuestionAsFlagged() {
 
 // Handle marked question list
 markedQuestionsContainer.addEventListener("click", (e) => {
-  // console.log(e.target.parentElement.classList);
   if (
     e.target.parentElement.classList.contains("fa-trash") ||
     e.target.classList.contains(".deleteBtn")
