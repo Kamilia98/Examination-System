@@ -114,8 +114,8 @@
       "exams": [
         {
           "examId": 101,
-          "status": "success",
-          "score": "100.00"
+          "status": "fail",
+          "score": "-1"
         },
         {
           "examId": 102,
