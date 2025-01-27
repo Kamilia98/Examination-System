@@ -47,8 +47,8 @@
         },
         {
           "examId": 102,
-          "status": "pending",
-          "score": null
+          "status": "success",
+          "score": "85.71"
         },
         {
           "examId": 201,
