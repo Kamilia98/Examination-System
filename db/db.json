@@ -56,6 +56,30 @@
           "score": null
         }
       ]
+    },
+    {
+      "id": 4,
+      "fname": "Ghada",
+      "lname": "Harb",
+      "email": "ghada@example.com",
+      "password": "Ghada123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
     }
   ],
   "exams": [
@@ -93,7 +117,12 @@
       "id": "2",
       "examId": 101,
       "text": "Which HTML tag is used to define the largest heading?",
-      "options": ["<heading>", "<h1>", "<head>", "<h6>"],
+      "options": [
+        "<heading>",
+        "<h1>",
+        "<head>",
+        "<h6>"
+      ],
       "correctAnswer": 1,
       "difficulty": "h"
     },
@@ -101,7 +130,12 @@
       "id": "3",
       "examId": 101,
       "text": "Which tag is used for inserting a line break?",
-      "options": ["<break>", "<lb>", "<br>", "<line>"],
+      "options": [
+        "<break>",
+        "<lb>",
+        "<br>",
+        "<line>"
+      ],
       "correctAnswer": 2,
       "difficulty": "m"
     },
@@ -109,7 +143,12 @@
       "id": "4",
       "examId": 101,
       "text": "Which attribute specifies an alternative text for an image?",
-      "options": ["src", "alt", "title", "href"],
+      "options": [
+        "src",
+        "alt",
+        "title",
+        "href"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -117,7 +156,12 @@
       "id": "5",
       "examId": 101,
       "text": "Which HTML tag is used to display a numbered list?",
-      "options": ["<ul>", "<ol>", "<list>", "<dl>"],
+      "options": [
+        "<ul>",
+        "<ol>",
+        "<list>",
+        "<dl>"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -125,7 +169,12 @@
       "id": "6",
       "examId": 101,
       "text": "Which HTML element is used to define a paragraph?",
-      "options": ["<div>", "<p>", "<span>", "<para>"],
+      "options": [
+        "<div>",
+        "<p>",
+        "<span>",
+        "<para>"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -146,7 +195,12 @@
       "id": "8",
       "examId": 101,
       "text": "Which HTML tag is used to create a hyperlink?",
-      "options": ["<link>", "<a>", "<href>", "<hyperlink>"],
+      "options": [
+        "<link>",
+        "<a>",
+        "<href>",
+        "<hyperlink>"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -154,7 +208,12 @@
       "id": "9",
       "examId": 101,
       "text": "Which of the following HTML elements is not a valid form control?",
-      "options": ["<input>", "<select>", "<button>", "<footer>"],
+      "options": [
+        "<input>",
+        "<select>",
+        "<button>",
+        "<footer>"
+      ],
       "correctAnswer": 3,
       "difficulty": "h"
     },
@@ -162,7 +221,12 @@
       "id": "10",
       "examId": 101,
       "text": "What is the default file extension for HTML files?",
-      "options": [".html", ".htm", ".html5", ".xhtml"],
+      "options": [
+        ".html",
+        ".htm",
+        ".html5",
+        ".xhtml"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -183,7 +247,12 @@
       "id": "12",
       "examId": 102,
       "text": "Which property is used to change the background color?",
-      "options": ["background-color", "color", "bg-color", "background"],
+      "options": [
+        "background-color",
+        "color",
+        "bg-color",
+        "background"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -191,7 +260,12 @@
       "id": "13",
       "examId": 102,
       "text": "Which property is used to change the text color of an element?",
-      "options": ["text-color", "color", "font-color", "foreground-color"],
+      "options": [
+        "text-color",
+        "color",
+        "font-color",
+        "foreground-color"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -199,7 +273,12 @@
       "id": "14",
       "examId": 102,
       "text": "How do you select an element with the class 'button' in CSS?",
-      "options": ["#button", ".button", "button", "*button"],
+      "options": [
+        "#button",
+        ".button",
+        "button",
+        "*button"
+      ],
       "correctAnswer": 1,
       "difficulty": "m"
     },
@@ -207,7 +286,12 @@
       "id": "15",
       "examId": 102,
       "text": "Which CSS property is used to change the font of an element?",
-      "options": ["font-family", "font-style", "font-weight", "font"],
+      "options": [
+        "font-family",
+        "font-style",
+        "font-weight",
+        "font"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -215,7 +299,12 @@
       "id": "16",
       "examId": 102,
       "text": "What is the default position value for an HTML element?",
-      "options": ["static", "relative", "absolute", "fixed"],
+      "options": [
+        "static",
+        "relative",
+        "absolute",
+        "fixed"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -223,7 +312,12 @@
       "id": "17",
       "examId": 102,
       "text": "Which property is used to create space between the element's content and its border?",
-      "options": ["margin", "padding", "border-spacing", "spacing"],
+      "options": [
+        "margin",
+        "padding",
+        "border-spacing",
+        "spacing"
+      ],
       "correctAnswer": 1,
       "difficulty": "m"
     },
@@ -231,7 +325,12 @@
       "id": "18",
       "examId": 102,
       "text": "Which CSS property is used to make text bold?",
-      "options": ["font-style", "font-weight", "text-style", "font-bold"],
+      "options": [
+        "font-style",
+        "font-weight",
+        "text-style",
+        "font-bold"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -239,7 +338,12 @@
       "id": "19",
       "examId": 102,
       "text": "Which CSS property is used to control the stacking order of elements?",
-      "options": ["stack", "z-index", "order", "position"],
+      "options": [
+        "stack",
+        "z-index",
+        "order",
+        "position"
+      ],
       "correctAnswer": 1,
       "difficulty": "m"
     },
@@ -247,7 +351,12 @@
       "id": "20",
       "examId": 102,
       "text": "Which CSS unit is relative to the font size of the root element?",
-      "options": ["em", "rem", "%", "px"],
+      "options": [
+        "em",
+        "rem",
+        "%",
+        "px"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -255,7 +364,12 @@
       "id": "21",
       "examId": 201,
       "text": "Which attribute is used to define inline CSS styles?",
-      "options": ["class", "id", "style", "css"],
+      "options": [
+        "class",
+        "id",
+        "style",
+        "css"
+      ],
       "correctAnswer": 2,
       "difficulty": "e"
     },
@@ -263,7 +377,12 @@
       "id": "22",
       "examId": 201,
       "text": "Which HTML5 element is used to define navigation links?",
-      "options": ["<nav>", "<section>", "<header>", "<aside>"],
+      "options": [
+        "<nav>",
+        "<section>",
+        "<header>",
+        "<aside>"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -284,7 +403,12 @@
       "id": "24",
       "examId": 201,
       "text": "Which CSS property is used to create a flexible layout?",
-      "options": ["flex", "display", "float", "grid"],
+      "options": [
+        "flex",
+        "display",
+        "float",
+        "grid"
+      ],
       "correctAnswer": 1,
       "difficulty": "m"
     },
@@ -305,7 +429,12 @@
       "id": "26",
       "examId": 201,
       "text": "Which CSS property is used to create animations?",
-      "options": ["animation", "transform", "transition", "keyframes"],
+      "options": [
+        "animation",
+        "transform",
+        "transition",
+        "keyframes"
+      ],
       "correctAnswer": 0,
       "difficulty": "h"
     },
@@ -326,7 +455,12 @@
       "id": "28",
       "examId": 201,
       "text": "Which HTML element is used to embed a video file?",
-      "options": ["<video>", "<media>", "<movie>", "<embed>"],
+      "options": [
+        "<video>",
+        "<media>",
+        "<movie>",
+        "<embed>"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -334,7 +468,12 @@
       "id": "29",
       "examId": 201,
       "text": "Which CSS property is used to change the width of an element?",
-      "options": ["width", "size", "height", "length"],
+      "options": [
+        "width",
+        "size",
+        "height",
+        "length"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -355,7 +494,12 @@
       "id": "31",
       "examId": 101,
       "text": "Which tag is used to create a table in HTML?",
-      "options": ["<table>", "<tb>", "<tr>", "<grid>"],
+      "options": [
+        "<table>",
+        "<tb>",
+        "<tr>",
+        "<grid>"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -363,7 +507,12 @@
       "id": "32",
       "examId": 101,
       "text": "Which tag is used to define an unordered list?",
-      "options": ["<ul>", "<ol>", "<list>", "<dir>"],
+      "options": [
+        "<ul>",
+        "<ol>",
+        "<list>",
+        "<dir>"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -371,7 +520,12 @@
       "id": "33",
       "examId": 102,
       "text": "Which property is used to control the text alignment in CSS?",
-      "options": ["text-align", "align-text", "text-position", "text-center"],
+      "options": [
+        "text-align",
+        "align-text",
+        "text-position",
+        "text-center"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -392,7 +546,12 @@
       "id": "35",
       "examId": 201,
       "text": "Which HTML5 element is used to define the main content of a page?",
-      "options": ["<section>", "<header>", "<footer>", "<main>"],
+      "options": [
+        "<section>",
+        "<header>",
+        "<footer>",
+        "<main>"
+      ],
       "correctAnswer": 3,
       "difficulty": "e"
     },
@@ -400,7 +559,12 @@
       "id": "36",
       "examId": 201,
       "text": "Which property is used to change the text size in CSS?",
-      "options": ["font-size", "text-size", "size", "font-style"],
+      "options": [
+        "font-size",
+        "text-size",
+        "size",
+        "font-style"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -408,7 +572,12 @@
       "id": "37",
       "examId": 201,
       "text": "Which HTML element is used to define a form?",
-      "options": ["<input>", "<form>", "<button>", "<select>"],
+      "options": [
+        "<input>",
+        "<form>",
+        "<button>",
+        "<select>"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -429,7 +598,12 @@
       "id": "39",
       "examId": 201,
       "text": "Which tag is used to embed a sound file in HTML?",
-      "options": ["<audio>", "<sound>", "<music>", "<mp3>"],
+      "options": [
+        "<audio>",
+        "<sound>",
+        "<music>",
+        "<mp3>"
+      ],
       "correctAnswer": 0,
       "difficulty": "h"
     },
@@ -437,7 +611,12 @@
       "id": "40",
       "examId": 201,
       "text": "Which of the following is a valid color code in CSS?",
-      "options": ["#fff", "white", "rgb(255, 255, 255)", "all of the above"],
+      "options": [
+        "#fff",
+        "white",
+        "rgb(255, 255, 255)",
+        "all of the above"
+      ],
       "correctAnswer": 3,
       "difficulty": "e"
     },
@@ -445,7 +624,12 @@
       "id": "31",
       "examId": 101,
       "text": "Which tag is used to create a table in HTML?",
-      "options": ["<table>", "<tb>", "<tr>", "<grid>"],
+      "options": [
+        "<table>",
+        "<tb>",
+        "<tr>",
+        "<grid>"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -453,7 +637,12 @@
       "id": "32",
       "examId": 101,
       "text": "Which tag is used to define an unordered list?",
-      "options": ["<ul>", "<ol>", "<list>", "<dir>"],
+      "options": [
+        "<ul>",
+        "<ol>",
+        "<list>",
+        "<dir>"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -461,7 +650,12 @@
       "id": "33",
       "examId": 102,
       "text": "Which property is used to control the text alignment in CSS?",
-      "options": ["text-align", "align-text", "text-position", "text-center"],
+      "options": [
+        "text-align",
+        "align-text",
+        "text-position",
+        "text-center"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -482,7 +676,12 @@
       "id": "35",
       "examId": 201,
       "text": "Which HTML5 element is used to define the main content of a page?",
-      "options": ["<section>", "<header>", "<footer>", "<main>"],
+      "options": [
+        "<section>",
+        "<header>",
+        "<footer>",
+        "<main>"
+      ],
       "correctAnswer": 3,
       "difficulty": "e"
     },
@@ -490,7 +689,12 @@
       "id": "36",
       "examId": 201,
       "text": "Which property is used to change the text size in CSS?",
-      "options": ["font-size", "text-size", "size", "font-style"],
+      "options": [
+        "font-size",
+        "text-size",
+        "size",
+        "font-style"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -498,7 +702,12 @@
       "id": "37",
       "examId": 201,
       "text": "Which HTML element is used to define a form?",
-      "options": ["<input>", "<form>", "<button>", "<select>"],
+      "options": [
+        "<input>",
+        "<form>",
+        "<button>",
+        "<select>"
+      ],
       "correctAnswer": 1,
       "difficulty": "e"
     },
@@ -519,7 +728,12 @@
       "id": "39",
       "examId": 201,
       "text": "Which tag is used to embed a sound file in HTML?",
-      "options": ["<audio>", "<sound>", "<music>", "<mp3>"],
+      "options": [
+        "<audio>",
+        "<sound>",
+        "<music>",
+        "<mp3>"
+      ],
       "correctAnswer": 0,
       "difficulty": "h"
     },
@@ -527,7 +741,12 @@
       "id": "40",
       "examId": 201,
       "text": "Which of the following is a valid color code in CSS?",
-      "options": ["#fff", "white", "rgb(255, 255, 255)", "all of the above"],
+      "options": [
+        "#fff",
+        "white",
+        "rgb(255, 255, 255)",
+        "all of the above"
+      ],
       "correctAnswer": 3,
       "difficulty": "e"
     },
@@ -535,7 +754,12 @@
       "id": "41",
       "examId": 101,
       "text": "Which tag is used to create a form in HTML?",
-      "options": ["<form>", "<input>", "<button>", "<select>"],
+      "options": [
+        "<form>",
+        "<input>",
+        "<button>",
+        "<select>"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -556,7 +780,12 @@
       "id": "43",
       "examId": 102,
       "text": "Which CSS property is used to make text italic?",
-      "options": ["font-style", "text-style", "font-weight", "text-align"],
+      "options": [
+        "font-style",
+        "text-style",
+        "font-weight",
+        "text-align"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -577,7 +806,12 @@
       "id": "45",
       "examId": 201,
       "text": "Which HTML5 element is used to define the header of a document?",
-      "options": ["<header>", "<footer>", "<nav>", "<section>"],
+      "options": [
+        "<header>",
+        "<footer>",
+        "<nav>",
+        "<section>"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -585,7 +819,12 @@
       "id": "46",
       "examId": 201,
       "text": "Which CSS property is used to set the transparency of an element?",
-      "options": ["opacity", "visibility", "transparency", "display"],
+      "options": [
+        "opacity",
+        "visibility",
+        "transparency",
+        "display"
+      ],
       "correctAnswer": 0,
       "difficulty": "m"
     },
@@ -593,7 +832,12 @@
       "id": "47",
       "examId": 201,
       "text": "Which HTML5 element is used to define a footer for a document?",
-      "options": ["<footer>", "<header>", "<aside>", "<article>"],
+      "options": [
+        "<footer>",
+        "<header>",
+        "<aside>",
+        "<article>"
+      ],
       "correctAnswer": 0,
       "difficulty": "e"
     },
@@ -627,7 +871,12 @@
       "id": "50",
       "examId": 201,
       "text": "Which CSS property is used to create a shadow effect for text?",
-      "options": ["text-shadow", "box-shadow", "shadow", "font-shadow"],
+      "options": [
+        "text-shadow",
+        "box-shadow",
+        "shadow",
+        "font-shadow"
+      ],
       "correctAnswer": 0,
       "difficulty": "h"
     }
