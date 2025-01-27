@@ -6,7 +6,6 @@ const page = document.getElementById("page");
 const logoutBtn = document.getElementById("logoutBtn");
 const welcomeText = document.querySelector("#welcomeText");
 const userName = document.querySelector("#userName");
-const examsStat = document.querySelector("#examsStat");
 const examsContainer = document.querySelector("#exams");
 const profilePicture = document.querySelector(".profilePic");
 

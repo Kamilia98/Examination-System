@@ -41,7 +41,7 @@ const questionNoItem = document.querySelector("#questionNo");
 const markedQuestionsContainer = document.querySelector("#markedQuestions");
 const loader = document.getElementById("loader");
 const page = document.getElementById("page");
-const welcomeText = document.getElementById("userName");
+const userName = document.getElementById('userName');
 const profilePicture = document.querySelector(".profilePic");
 
 let questions = [];
@@ -76,7 +76,7 @@ flagBtn.addEventListener("click", markQuestionAsFlagged);
     [exam] = await fetchExam(examId);
     showTitle(exam.title);
     showTimer(exam.duration * 60);
-    welcomeText.textContent = `${user.firstName} ${user.lastName}`;
+    userName.textContent = `${user.firstName} ${user.lastName}`;
     // Hide loader and show page content
     loader.classList.add("hidden");
     page.classList.remove("hidden");
