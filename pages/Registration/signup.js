@@ -5,6 +5,8 @@ import { goToLogin } from "./navigate.js";
 // DOM Elements
 const signupForm = document.querySelector("#signupForm");
 const eyeIcons = signupForm.querySelectorAll(".eye-icon");
+
+// Input Fields
 const inputs = {
   fName: signupForm.querySelector("#firstName"),
   lName: signupForm.querySelector("#lastName"),
@@ -15,11 +17,15 @@ const inputs = {
 };
 
 const errorMessages = signupForm.querySelectorAll(".error-message");
+// Error Messages
 const errors = {
   fName: inputs.fName.closest(".form-input").querySelector(".error-message"),
   lName: inputs.lName.closest(".form-input").querySelector(".error-message"),
   email: inputs.email.closest(".form-input").querySelector(".error-message"),
-  // gender: inputs.gender.closest(".form-input").querySelector(".error-message"),
+  gender: signupForm
+    .querySelector('.form-input input[name="gender"]')
+    .closest(".form-input")
+    .querySelector(".error-message"),
   password: inputs.password
     .closest(".form-input")
     .querySelector(".error-message"),
@@ -28,7 +34,7 @@ const errors = {
     .querySelector(".error-message"),
   formError: errorMessages[errorMessages.length - 1],
 };
-
+// console.log(errors);
 // Toggle Password Visibility
 eyeIcons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
@@ -53,6 +59,26 @@ const validatePassword = (password) =>
   /[a-z]/.test(password) &&
   /[0-9]/.test(password);
 
+// Clear Errors and Styles (updated for gender inputs)
+const clearErrors = () => {
+  Object.values(errors).forEach((error) => {
+    error.classList.remove("show");
+    error.textContent = ""; // Clear any previous error messages
+  });
+
+  Object.values(inputs).forEach((input) => {
+    if (input instanceof NodeList) {
+      input.forEach((inp) => {
+        inp.classList.remove("error");
+        inp.removeAttribute("aria-invalid");
+        inp.closest("label").classList.remove("error");
+      });
+    } else {
+      input.classList.remove("error");
+      input.removeAttribute("aria-invalid");
+    }
+  });
+};
 // Form Submission
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
