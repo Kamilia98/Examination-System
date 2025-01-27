@@ -67,7 +67,10 @@ const getStatusMessage = (score, name) => {
 };
 
 // Get result data and update the page
-const { message, status, color, src } = getStatusMessage(score, user.firstName);
+const { message, status, color, src } = getStatusMessage(
+  Number(CurentExamScore),
+  user.firstName
+);
 resultImg.src = src;
 resultText.textContent = message;
 resultText.style.color = color;
@@ -75,14 +78,14 @@ resultText.style.color = color;
 // Event Listener: Update user exam and navigate to home
 homeBtn.addEventListener("click", async () => {
   const updatedExamData = {
-    examId: Number(examId),
+    examId: Number(currentExamId),
     status,
-    score,
+    score: CurentExamScore,
   };
 
   let userData = JSON.parse(localStorage.getItem("userData"));
   if (!userData) {
-    [userData] = await fetchUser(userId);
+    [userData] = await fetchUser(originalParams.userId);
   }
 
   // Update user's exam data
@@ -97,7 +100,7 @@ homeBtn.addEventListener("click", async () => {
 
   // Save updated user data and send to backend
   localStorage.setItem("userData", JSON.stringify(userData));
-  await updateUserExam(userId, examId, updatedExamData);
+  await updateUserExam(user.id, currentExamId, updatedExamData);
 
   // Redirect to home page
   history.replaceState(null, "", `../Home/home.html?userId=${userData.id}`);

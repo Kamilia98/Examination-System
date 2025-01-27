@@ -52,6 +52,7 @@ loginForm.addEventListener("submit", async (e) => {
             firstName: user.fname,
             lastName: user.lname,
             id: user.id,
+            gender: user.gender,
           })
         );
         history.replaceState(null, "", `../Home/home.html?userId=${user.id}`);

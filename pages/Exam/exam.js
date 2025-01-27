@@ -5,6 +5,33 @@ const { userId, examId, difficulty } = Object.fromEntries(
   new URLSearchParams(window.location.search).entries()
 );
 
+const user = JSON.parse(localStorage.getItem("user"));
+
+const currentExamId = localStorage.getItem("currentExamId");
+const currentExamDifficulty = localStorage.getItem("currentExamDifficulty");
+console.log(currentExamDifficulty);
+const originalParams = {
+  userId: user.id,
+  examId: currentExamId,
+  difficulty: currentExamDifficulty,
+};
+
+const originalUrl = `../Exam/exam.html?userId=${originalParams.userId}&examId=${originalParams.examId}&difficulty=${originalParams.difficulty}`;
+
+// Function to check and enforce original URL
+(function enforceOriginalUrl() {
+  const currentParams = new URLSearchParams(window.location.search);
+
+  // Redirect if any parameter doesn't match
+  if (
+    currentParams.get("userId") !== String(originalParams.userId) ||
+    currentParams.get("examId") !== String(originalParams.examId) ||
+    currentParams.get("difficulty") !== String(originalParams.difficulty)
+  ) {
+    window.location.href = originalUrl; // Redirect to the original URL
+  }
+})();
+
 // DOM Elements
 const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
@@ -14,6 +41,8 @@ const questionNoItem = document.querySelector("#questionNo");
 const markedQuestionsContainer = document.querySelector("#markedQuestions");
 const loader = document.getElementById("loader");
 const page = document.getElementById("page");
+const welcomeText = document.getElementById("userName");
+const profilePicture = document.querySelector(".profilePic");
 
 let questions = [];
 let exam = {};
@@ -47,10 +76,13 @@ flagBtn.addEventListener("click", markQuestionAsFlagged);
     [exam] = await fetchExam(examId);
     showTitle(exam.title);
     showTimer(exam.duration * 60);
-
+    welcomeText.textContent = `${user.firstName} ${user.lastName}`;
     // Hide loader and show page content
     loader.classList.add("hidden");
     page.classList.remove("hidden");
+    user.gender === "M"
+      ? (profilePicture.src = "../../assets/images/maleUser.jpg")
+      : (profilePicture.src = "../../assets/images/user.png");
   } catch (error) {
     console.error("Error fetching data:", error);
     // Ensure loader is hidden even if there's an error

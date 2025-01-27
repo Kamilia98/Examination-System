@@ -8,17 +8,36 @@ const welcomeText = document.querySelector("#welcomeText");
 const userName = document.querySelector("#userName");
 const examsStat = document.querySelector("#examsStat");
 const examsContainer = document.querySelector("#exams");
+const profilePicture = document.querySelector(".profilePic");
 
 // Constants
 const user = JSON.parse(localStorage.getItem("user"));
 const userId = new URLSearchParams(window.location.search).get("userId");
+
+const originalParams = {
+  currentUserId: user.id,
+};
+console.log(originalParams.currentUserId);
+
+// Construct the original URL
+const originalUrl = `../Home/home.html?userId=${originalParams.currentUserId}`;
+
+// Function to check and enforce original URL
+(function enforceOriginalUrl() {
+  // Redirect if any parameter doesn't match
+  if (userId !== String(originalParams.currentUserId)) {
+    window.location.href = originalUrl; // Redirect to the original URL
+  }
+})();
 
 // Initial Setup
 loader.classList.remove("hidden");
 page.classList.add("hidden");
 welcomeText.textContent = `Welcome, ${user.firstName}!`;
 userName.textContent = `${user.firstName} ${user.lastName}`;
-
+user.gender === "M"
+  ? (profilePicture.src = "../../assets/images/maleUser.jpg")
+  : (profilePicture.src = "../../assets/images/user.png");
 // Event Listeners
 logoutBtn.addEventListener("click", handleLogout);
 document.addEventListener("click", handleStartExamClick);
@@ -161,6 +180,7 @@ function handleStartExamClick(e) {
 
     confirmButton.onclick = () => {
       localStorage.setItem("currentExamId", exam);
+      localStorage.setItem("currentExamDifficulty", difficulty);
       history.replaceState(
         null,
         "",
