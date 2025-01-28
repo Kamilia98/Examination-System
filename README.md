@@ -18,3 +18,6 @@ Technologies used in the project:
 - CSS
 - JAVASCRIPT
 - BOOTSTRAP
+
+<h2> Live Demo </h2>
+![Video Thumbnail](./demo.mp4)
