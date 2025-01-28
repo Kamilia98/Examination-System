@@ -5,6 +5,32 @@ const { userId, examId, difficulty } = Object.fromEntries(
   new URLSearchParams(window.location.search).entries()
 );
 
+const user = JSON.parse(localStorage.getItem('user'));
+
+const currentExamId = localStorage.getItem('currentExamId');
+const currentExamDifficulty = localStorage.getItem('currentExamDifficulty');
+const originalParams = {
+  userId: user.id,
+  examId: currentExamId,
+  difficulty: currentExamDifficulty,
+};
+
+const originalUrl = `../Exam/exam.html?userId=${originalParams.userId}&examId=${originalParams.examId}&difficulty=${originalParams.difficulty}`;
+
+// Function to check and enforce original URL
+(function enforceOriginalUrl() {
+  const currentParams = new URLSearchParams(window.location.search);
+
+  // Redirect if any parameter doesn't match
+  if (
+    currentParams.get('userId') !== String(originalParams.userId) ||
+    currentParams.get('examId') !== String(originalParams.examId) ||
+    currentParams.get('difficulty') !== String(originalParams.difficulty)
+  ) {
+    window.location.href = originalUrl; // Redirect to the original URL
+  }
+})();
+
 // DOM Elements
 const prevBtn = document.querySelector('#prevBtn');
 const nextBtn = document.querySelector('#nextBtn');
@@ -14,6 +40,8 @@ const questionNoItem = document.querySelector('#questionNo');
 const markedQuestionsContainer = document.querySelector('#markedQuestions');
 const loader = document.getElementById('loader');
 const page = document.getElementById('page');
+const userName = document.getElementById('userName');
+const profilePicture = document.querySelector('.profilePic');
 
 let questions = [];
 let exam = {};
@@ -47,10 +75,13 @@ flagBtn.addEventListener('click', markQuestionAsFlagged);
     [exam] = await fetchExam(examId);
     showTitle(exam.title);
     showTimer(exam.duration * 60);
-
+    userName.textContent = `${user.firstName} ${user.lastName}`;
     // Hide loader and show page content
     loader.classList.add('hidden');
     page.classList.remove('hidden');
+    user.gender === 'M'
+      ? (profilePicture.src = '../../assets/images/maleUser.jpg')
+      : (profilePicture.src = '../../assets/images/user.png');
   } catch (error) {
     console.error('Error fetching data:', error);
     // Ensure loader is hidden even if there's an error
@@ -152,6 +183,7 @@ function handleSubmit() {
       0
     );
     score = ((score / questions.length) * 100).toFixed(2);
+    localStorage.setItem('currentExamScore', score);
     history.replaceState(
       null,
       '',
@@ -164,18 +196,18 @@ function handleSubmit() {
 // Mark question as flagged
 function markQuestionAsFlagged() {
   const exists = Array.from(
-    markedQuestionsContainer.querySelectorAll('.markedQuestion')
+    markedQuestionsContainer.querySelectorAll('.marked-question')
   ).some((el) => el.dataset.index == index);
   if (!exists) {
     const markedQuestionEl = createElement('div', {
-      className: 'markedQuestion',
+      className: 'marked-question',
       dataset: { index },
     });
     const titleEl = createElement('div', {
       textContent: `Question ${index + 1}`,
     });
     const deleteBtn = createElement('button', {
-      className: 'deleteBtn',
+      className: 'delete-btn',
       innerHTML: "<i class='fa-solid fa-trash'></i>",
     });
 
@@ -188,11 +220,11 @@ function markQuestionAsFlagged() {
 markedQuestionsContainer.addEventListener('click', (e) => {
   if (
     e.target.parentElement.classList.contains('fa-trash') ||
-    e.target.classList.contains('.deleteBtn')
+    e.target.classList.contains('.delete-btn')
   ) {
-    e.target.closest('.markedQuestion').remove();
-  } else if (e.target.closest('.markedQuestion')) {
-    index = Number(e.target.closest('.markedQuestion').dataset.index);
+    e.target.closest('.marked-question').remove();
+  } else if (e.target.closest('.marked-question')) {
+    index = Number(e.target.closest('.marked-question').dataset.index);
     displayQuestion(index);
   }
 });

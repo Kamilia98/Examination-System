@@ -4,6 +4,7 @@
       "id": "1",
       "fname": "John",
       "lname": "Doe",
+      "gender": "M",
       "email": "john@example.com",
       "password": "123",
       "exams": [
@@ -14,8 +15,8 @@
         },
         {
           "examId": 102,
-          "status": "pending",
-          "score": null
+          "status": "fail",
+          "score": "0.00"
         }
       ]
     },
@@ -23,41 +24,19 @@
       "id": "2",
       "fname": "Jane",
       "lname": "Doe",
+      "gender": "F",
       "email": "jane@example.com",
       "password": "123",
       "exams": [
         {
           "examId": 201,
-          "status": "fail",
-          "score": 40
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "fname": "kamilia",
-      "lname": "ahmed",
-      "email": "kamiefthd01@gmail.com",
-      "password": "Kamilia123",
-      "exams": [
-        {
-          "examId": 101,
-          "status": "pending",
-          "score": null
-        },
-        {
-          "examId": 102,
           "status": "success",
-          "score": "85.71"
-        },
-        {
-          "examId": 201,
-          "status": "pending",
-          "score": null
+          "score": "70.00"
         }
       ]
     }
   ],
+  
   "exams": [
     {
       "id": "101",

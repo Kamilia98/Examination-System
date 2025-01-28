@@ -3,6 +3,7 @@ import { fetchUsers } from '../../db/Apis/GET.js';
 // DOM Elements
 const loginForm = document.querySelector('#loginForm');
 const eyeIcons = loginForm.querySelectorAll('.eye-icon');
+
 const inputs = {
   email: loginForm.querySelector('#emailInput'),
   password: loginForm.querySelector('#passwordInput'),
@@ -52,8 +53,10 @@ loginForm.addEventListener('submit', async (e) => {
             firstName: user.fname,
             lastName: user.lname,
             id: user.id,
+            gender: user.gender,
           })
         );
+        history.replaceState(null, '', `../Home/home.html?userId=${user.id}`);
         location.href = `../Home/home.html?userId=${user.id}`;
       } else {
         // Incorrect password

@@ -20,93 +20,136 @@
     <link rel="stylesheet" href="../../assets/css/style.css" />
   </head>
   <body class="background-image">
-    <main class="registration-page">
-      <section class="swapper"></section>
-      <section class="login active">
-        <h1>Login</h1>
-        <form action="home.html" id="loginForm">
-          <div class="form-input">
-            <label for="emailInput">Email</label>
-            <input type="text" id="emailInput" />
-            <span class="error-message"></span>
-          </div>
-          <div class="form-input">
-            <label for="passwordInput">Password</label>
-            <div class="password-input">
-              <input type="password" id="passwordInput" />
-              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+    
+    <div id="page">
+      <main class="registration-page">
+        <section class="swapper"></section>
+        <section class="login active">
+          <h1>Login</h1>
+          <form action="home.html" id="loginForm">
+            <div class="form-input">
+              <label for="emailInput">Email</label>
+              <input type="text" id="emailInput" />
+              <span class="error-message"></span>
             </div>
-            <span class="error-message">Password is not correct.</span>
-          </div>
-          <button type="submit">Submit</button>
-          <span class="error-message" aria-live="polite"
-            >Email or Password is not correct.</span
-          >
-        </form>
-        <div class="navigate">
-          <span>Don't have account?</span>
-          <!-- <a href="../Signup/signup.html">Start for free</a> -->
-          <button id="goToSignup">Start for free</button>
-        </div>
-      </section>
-      <section class="signup">
-        <h1>Create account</h1>
-        <form action="home.html" id="signupForm" aria-label="Sign Up Form">
-          <div class="form-input">
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" />
-            <span class="error-message" aria-live="polite">
-              First name must be 3-20 characters and only letters.
-            </span>
-          </div>
-          <div class="form-input">
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" />
-            <span class="error-message" aria-live="polite">
-              Last name must be 3-20 characters and only letters.
-            </span>
-          </div>
-          <div class="form-input">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" />
-            <span class="error-message" aria-live="polite">
-              Invalid email format.
-            </span>
-          </div>
-          <div class="form-input">
-            <label for="password">Password</label>
-            <div class="password-input">
-              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
-              <input type="password" id="password" name="password" />
+            <div class="form-input">
+              <label for="passwordInput">Password</label>
+              <div class="password-input">
+                <input type="password" id="passwordInput" />
+                <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+              </div>
+              <span class="error-message">Password is not correct.</span>
             </div>
-            <span class="error-message" aria-live="polite">
-              Password: 8+ chars, number, uppercase &amp; lowercase.
-            </span>
-          </div>
-          <div class="form-input">
-            <label for="confirmPassword">Confirm Password</label>
-            <div class="password-input">
-              <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-              />
-            </div>
-            <span class="error-message" aria-live="polite">
-              Passwords do not match.
-            </span>
-          </div>
 
-          <button type="submit">Submit</button>
-          <span class="error-message" aria-live="polite"></span>
-        </form>
-        <div class="navigate">
-          <span>Already have an account?</span>
-          <button id="goToLogin">Login</button>
-        </div>
-      </section>
-    </main>
+            <button type="submit">Submit</button>
+            <span class="error-message" aria-live="polite"
+              >Email or Password is not correct.</span
+            >
+          </form>
+          <div class="navigate">
+            <span>Don't have account?</span>
+            <!-- <a href="../Signup/signup.html">Start for free</a> -->
+            <button id="goToSignup">Start for free</button>
+          </div>
+        </section>
+        <section class="signup">
+          <h1>Create account</h1>
+          <form action="home.html" id="signupForm" aria-label="Sign Up Form">
+            <div class="form-input">
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" name="firstName" />
+              <span class="error-message" aria-live="polite">
+                First name must be 3-20 characters and only letters.
+              </span>
+            </div>
+            <div class="form-input">
+              <label for="lastName">Last name</label>
+              <input type="text" id="lastName" name="lastName" />
+              <span class="error-message" aria-live="polite">
+                Last name must be 3-20 characters and only letters.
+              </span>
+            </div>
+            <div class="form-input">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" />
+              <span class="error-message" aria-live="polite">
+                Invalid email format.
+              </span>
+            </div>
+            <div class="form-input">
+              <label for="password">Password</label>
+              <div class="password-input">
+                <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+                <input type="password" id="password" name="password" />
+              </div>
+              <span class="error-message" aria-live="polite">
+                Password: 8+ chars, number, uppercase &amp; lowercase.
+              </span>
+            </div>
+            <div class="form-input">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="password-input">
+                <div class="eye-icon"><i class="fa-solid fa-eye"></i></div>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                />
+              </div>
+              <span class="error-message" aria-live="polite">
+                Passwords do not match.
+              </span>
+            </div>
+            <div
+              class="form-input"
+              style="
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 15px;
+              "
+            >
+              <label for="gender">Gender</label>
+
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 3px;
+                "
+              >
+                <input type="radio" name="gender" value="M" />
+                <span>Male</span>
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 3px;
+                "
+              >
+                <input type="radio" name="gender" value="F" />
+                <span>Female</span>
+              </label>
+
+              <span class="error-message" aria-live="polite">
+                Please select your gender.
+              </span>
+            </div>
+
+            <button type="submit">Submit</button>
+            <span class="error-message" aria-live="polite"></span>
+          </form>
+          <div class="navigate">
+            <span>Already have an account?</span>
+            <button id="goToLogin">Login</button>
+          </div>
+        </section>
+      </main>
+    </div>
 
     <script type="module" src="signup.js"></script>
     <script type="module" src="login.js"></script>

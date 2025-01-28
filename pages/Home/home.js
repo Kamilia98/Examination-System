@@ -6,19 +6,36 @@ const page = document.getElementById('page');
 const logoutBtn = document.getElementById('logoutBtn');
 const welcomeText = document.querySelector('#welcomeText');
 const userName = document.querySelector('#userName');
-const examsStat = document.querySelector('#examsStat');
 const examsContainer = document.querySelector('#exams');
+const profilePicture = document.querySelector('.profilePic');
 
 // Constants
 const user = JSON.parse(localStorage.getItem('user'));
 const userId = new URLSearchParams(window.location.search).get('userId');
+
+const originalParams = {
+  currentUserId: user.id,
+};
+
+// Construct the original URL
+const originalUrl = `../Home/home.html?userId=${originalParams.currentUserId}`;
+
+// Function to check and enforce original URL
+(function enforceOriginalUrl() {
+  // Redirect if any parameter doesn't match
+  if (userId !== String(originalParams.currentUserId)) {
+    window.location.href = originalUrl; // Redirect to the original URL
+  }
+})();
 
 // Initial Setup
 loader.classList.remove('hidden');
 page.classList.add('hidden');
 welcomeText.textContent = `Welcome, ${user.firstName}!`;
 userName.textContent = `${user.firstName} ${user.lastName}`;
-
+user.gender === 'M'
+  ? (profilePicture.src = '../../assets/images/maleUser.jpg')
+  : (profilePicture.src = '../../assets/images/user.png');
 // Event Listeners
 logoutBtn.addEventListener('click', handleLogout);
 document.addEventListener('click', handleStartExamClick);
@@ -62,20 +79,23 @@ function updateCircleChart(percentages) {
   const circumference = 2 * Math.PI * radius;
   const circles = document.querySelectorAll('.circle .circle-fill');
 
-  circles[0].style.stroke = 'green';
-  circles[0].style.strokeDasharray = `${
-    (circumference * percentages.success) / 100
-  } ${circumference}`;
+  // Iterate through percentages
+  const colors = ['green', 'red', 'orange'];
+  const types = ['success', 'fail', 'pending'];
 
-  circles[1].style.stroke = 'red';
-  circles[1].style.strokeDasharray = `${
-    (circumference * percentages.fail) / 100
-  } ${circumference}`;
+  circles.forEach((circle, index) => {
+    const percentage = percentages[types[index]];
+    const offset = circumference - (circumference * percentage) / 100;
 
-  circles[2].style.stroke = 'orange';
-  circles[2].style.strokeDasharray = `${
-    (circumference * percentages.pending) / 100
-  } ${circumference}`;
+    // Set styles for the circle
+    circle.style.stroke = colors[index];
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference;
+
+    // Trigger animation
+    circle.style.animation = `dashAnim 1s ease-out forwards`;
+    circle.style.setProperty('--dash-offset', offset);
+  });
 }
 
 function updatePercentageText(percentages) {
@@ -160,6 +180,8 @@ function handleStartExamClick(e) {
     )}</p>`;
 
     confirmButton.onclick = () => {
+      localStorage.setItem('currentExamId', exam);
+      localStorage.setItem('currentExamDifficulty', difficulty);
       history.replaceState(
         null,
         '',
