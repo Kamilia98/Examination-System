@@ -20,4 +20,7 @@ Technologies used in the project:
 - BOOTSTRAP
 
 <h2> Live Demo </h2>
-[Watch the video](./demo.mp4)
+
+https://github.com/user-attachments/assets/6d9f591f-2ca2-4a21-8b04-d3a1d2d6b854
+
+
