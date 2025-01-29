@@ -20,4 +20,4 @@ Technologies used in the project:
 - BOOTSTRAP
 
 <h2> Live Demo </h2>
-![Video Thumbnail](./demo.mp4)
+[Watch the video](./demo.mp4)
