@@ -13,7 +13,7 @@ body {
 }
 
 .background-image {
-  background: url('../../assets/images/Rectangle 1.png') no-repeat top / cover;
+  background: url('../../assets/images/background.png') no-repeat top / cover;
 }
 
 #page {
@@ -110,7 +110,7 @@ button.grayBtn:hover {
   position: absolute;
   z-index: 1;
   right: 0;
-  background-image: url('../images/image\ 1.png');
+  background-image: url('../images/slider.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -445,11 +445,16 @@ form {
 .exam .exam-actions {
   width: 50%;
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
 .exam .exam-actions button {
   width: 300px;
+}
+
+.exam .exam-actions {
+  font-size: 18px;
 }
 
 @media (max-width: 1000px) {
