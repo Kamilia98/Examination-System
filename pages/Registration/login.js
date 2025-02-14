@@ -8,14 +8,12 @@ const inputs = {
   email: loginForm.querySelector('#emailInput'),
   password: loginForm.querySelector('#passwordInput'),
 };
-const errorMessages = loginForm.querySelectorAll('.error-message');
-const errors = {
-  email: inputs.email.closest('.form-input').querySelector('.error-message'),
-  password: inputs.password
-    .closest('.form-input')
-    .querySelector('.error-message'),
-  formError: errorMessages[errorMessages.length - 1],
-};
+
+const [emailError, passwordError, formError] = [
+  ...loginForm.querySelectorAll('.error-message'),
+];
+
+const errors = { email: emailError, password: passwordError, form: formError };
 
 // Toggle Password Visibility
 eyeIcons.forEach((icon) => {
@@ -65,10 +63,11 @@ loginForm.addEventListener('submit', async (e) => {
       }
     } else {
       // Email not found
-      errors.formError.classList.add('show');
+      errors.email.classList.add('show');
+      inputs.email.classList.add('error');
     }
   } catch (error) {
     console.error('Error fetching users:', error);
-    errors.formError.textContent = 'An error occurred. Please try again later.';
+    errors.form.textContent = 'An error occurred. Please try again later.';
   }
 });

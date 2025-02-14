@@ -92,10 +92,10 @@ function updateCircleChart(percentages) {
     circle.style.stroke = colors[index];
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = circumference;
+    circle.style.setProperty('--dash-offset', offset);
 
     // Trigger animation
     circle.style.animation = `dashAnim 1s ease-out forwards`;
-    circle.style.setProperty('--dash-offset', offset);
   });
 }
 
@@ -146,7 +146,7 @@ function getStatusColor(status) {
 
 function getExamActions(userExam, exam) {
   return `
-    <label class="form-label">Choose Difficulty:</label>
+    <label>Difficulty:</label>
     <select class="form-select">
       <option value="e">Easy</option>
       <option value="m" selected>Medium</option>
@@ -162,7 +162,7 @@ function getExamActions(userExam, exam) {
 
 function getExamScore(userExam) {
   return userExam.status === 'success'
-    ? `<p class="card-text score">Score: ${userExam.score}%</p>`
+    ? `<p class="card-text score">Score: ${Math.round(userExam.score)}%</p>`
     : '';
 }
 

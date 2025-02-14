@@ -445,11 +445,16 @@ form {
 .exam .exam-actions {
   width: 50%;
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
 .exam .exam-actions button {
   width: 300px;
+}
+
+.exam .exam-actions {
+  font-size: 18px;
 }
 
 @media (max-width: 1000px) {
