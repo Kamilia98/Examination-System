@@ -70,6 +70,7 @@ const { message, status, color, src } = getStatusMessage(
   Number(CurentExamScore),
   user.firstName
 );
+
 resultImg.src = src;
 resultText.textContent = message;
 resultText.style.color = color;

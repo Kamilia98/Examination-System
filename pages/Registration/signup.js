@@ -85,7 +85,6 @@ signupForm.addEventListener('submit', async (e) => {
 
   // Clear previous errors
   Object.values(errors).forEach((error) => error.classList.remove('show'));
-  // Object.values(inputs).forEach((input) => input.classList.remove("error"));
   Object.values(inputs).forEach((input) => {
     if (input instanceof NodeList) {
       input.forEach((inp) => inp.classList.remove('error'));
