@@ -33,9 +33,10 @@ loader.classList.remove('hidden');
 page.classList.add('hidden');
 welcomeText.textContent = `Welcome, ${user.firstName}!`;
 userName.textContent = `${user.firstName} ${user.lastName}`;
-user.gender === 'M'
-  ? (profilePicture.src = '../../assets/images/maleUser.jpg')
-  : (profilePicture.src = '../../assets/images/user.png');
+profilePicture.src = `../../assets/images/${
+  user.gender === 'F' ? 'fe' : ''
+}male.png`;
+
 // Event Listeners
 logoutBtn.addEventListener('click', handleLogout);
 document.addEventListener('click', handleStartExamClick);
