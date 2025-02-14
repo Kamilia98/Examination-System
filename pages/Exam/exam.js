@@ -79,9 +79,9 @@ flagBtn.addEventListener('click', markQuestionAsFlagged);
     // Hide loader and show page content
     loader.classList.add('hidden');
     page.classList.remove('hidden');
-    user.gender === 'M'
-      ? (profilePicture.src = '../../assets/images/maleUser.jpg')
-      : (profilePicture.src = '../../assets/images/user.png');
+    profilePicture.src = `../../assets/images/${
+      user.gender === 'F' ? 'fe' : ''
+    }male.png`;
   } catch (error) {
     console.error('Error fetching data:', error);
     // Ensure loader is hidden even if there's an error
