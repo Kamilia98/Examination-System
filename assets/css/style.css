@@ -218,6 +218,10 @@ form {
   opacity: 0.5;
 }
 
+.eye-icon i {
+  width: 20px;
+}
+
 /* Navigation Links */
 .navigate {
   display: flex;
