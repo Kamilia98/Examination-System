@@ -37,6 +37,7 @@ const nextBtn = document.querySelector('#nextBtn');
 const submitBtn = document.querySelector('#submitBtn');
 const flagBtn = document.querySelector('#flagBtn');
 const questionNoItem = document.querySelector('#questionNo');
+const dQuestionNoItem = document.querySelector('#dQusetionNo');
 const markedQuestionsContainer = document.querySelector('#markedQuestions');
 const loader = document.getElementById('loader');
 const page = document.getElementById('page');
@@ -51,8 +52,8 @@ let index = 0;
 loader.classList.remove('hidden');
 
 // Event listeners for navigation buttons
-prevBtn.addEventListener('click', () => navigateQuestions(-1));
-nextBtn.addEventListener('click', () => navigateQuestions(1));
+prevBtn.addEventListener('click', (e) => navigateQuestions(e, -1));
+nextBtn.addEventListener('click', (e) => navigateQuestions(e, 1));
 
 // Submit exam answers
 submitBtn.addEventListener('click', handleSubmit);
@@ -84,7 +85,9 @@ flagBtn.addEventListener('click', markQuestionAsFlagged);
     }male.png`;
   } catch (error) {
     console.error('Error fetching data:', error);
+    location.href = '../../pages/Error/error.html';
     // Ensure loader is hidden even if there's an error
+
     loader.classList.add('hidden');
   }
 })();
@@ -103,7 +106,7 @@ function showTimer(examTime = 5 * 60) {
   const timeEl = document.querySelector('#examTime');
   timeEl.textContent = formatTime(examTime);
   if (examTime <= 59) {
-    timeEl.parentElement.style.color = 'red';
+    timeEl.parentElement.style.color = '#c53e3e';
   }
 
   setInterval(() => {
@@ -114,6 +117,7 @@ function showTimer(examTime = 5 * 60) {
         `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`
       );
       location.href = `../Result/result.html?userId=${userId}&examId=${examId}&score=-1`;
+      localStorage.setItem('currentExamScore', -1);
     } else {
       timeEl.textContent = formatTime(--examTime);
     }
@@ -142,10 +146,30 @@ function displayQuestion(currentIndex) {
     q.classList.toggle('hidden', i !== currentIndex);
   });
   questionNoItem.textContent = `${currentIndex + 1}/${questions.length}`;
+  dQuestionNoItem.textContent = `${currentIndex + 1}.`;
+  const exists = Array.from(
+    markedQuestionsContainer.querySelectorAll('.marked-question')
+  ).some((el) => el.dataset.index == currentIndex);
+  if (exists) {
+    flagBtn.classList.add('active');
+  } else {
+    flagBtn.classList.remove('active');
+  }
+  if (currentIndex == 0) {
+    prevBtn.classList.add('disable');
+  } else {
+    prevBtn.classList.remove('disable');
+  }
+
+  if (currentIndex == questions.length - 1) {
+    nextBtn.classList.add('disable');
+  } else {
+    nextBtn.classList.remove('disable');
+  }
 }
 
 // Navigate between questions
-function navigateQuestions(step) {
+function navigateQuestions(event, step) {
   const newIndex = index + step;
   if (newIndex >= 0 && newIndex < questions.length) {
     index = newIndex;
@@ -170,8 +194,8 @@ function handleSubmit() {
   const modalBody = document.querySelector('.modal-body');
   const confirmButton = document.querySelector('#confirmButton');
 
-  modalTitle.textContent = `Submit Exam: ${exam.title}`;
-  modalBody.innerHTML = `<p>You answered <span style="color:red">
+  modalTitle.textContent = `Submit Exam`;
+  modalBody.innerHTML = `<p>You answered <span style="color:#c53e3e">
   
   ${answeredQuestions} 
   </span> out
@@ -182,6 +206,7 @@ function handleSubmit() {
       (score, answer, i) => score + (answer == questions[i].correctAnswer),
       0
     );
+
     score = ((score / questions.length) * 100).toFixed(2);
     localStorage.setItem('currentExamScore', score);
     history.replaceState(
@@ -213,6 +238,7 @@ function markQuestionAsFlagged() {
 
     markedQuestionEl.append(titleEl, deleteBtn);
     markedQuestionsContainer.appendChild(markedQuestionEl);
+    flagBtn.classList.add('active');
   }
 }
 
@@ -237,7 +263,7 @@ function appendQuestions(questions) {
       className: 'question hidden',
     });
     const questionText = createElement('p', {
-      textContent: question.text,
+      textContent: `${question.text}`,
       className: 'fw-bolder fs-5',
     });
     const optionsList = createElement('ul', {
@@ -254,16 +280,35 @@ function appendQuestions(questions) {
       });
       const label = createElement('label', {
         htmlFor: `option${inx}${i}`,
-        textContent: option,
-        className: 'ms-2',
       });
+      const optionEl = createElement('span', {
+        textContent: option,
+      });
+
+      label.append(optionEl);
 
       optionItem.append(radioInput, label);
       optionsList.appendChild(optionItem);
     });
 
     questionItem.append(questionText, optionsList);
-    questionsContainer.appendChild(questionItem);
+    questionsContainer.append(questionItem);
+    questionItem.addEventListener('click', (e) => {
+      let answers = [];
+      const questionsItems = document.querySelectorAll('.question');
+
+      questionsItems.forEach((question, index) => {
+        const selectedOption = question.querySelector(
+          'input[type="radio"]:checked'
+        );
+        answers.push(selectedOption ? selectedOption.value : null);
+      });
+
+      const answeredQuestions = answers.filter((a) => a !== null).length;
+      document.querySelector('.progress').style.width = document.querySelector(
+        '.progress'
+      ).dataset.width = `${(answeredQuestions / questions.length) * 100}%`;
+    });
   });
 }
 

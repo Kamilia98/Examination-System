@@ -42,25 +42,22 @@ const homeBtn = document.querySelector('#homeBtn');
 const getStatusMessage = (score, name) => {
   if (score == -1) {
     return {
-      message: `Time's out, ${name}`,
+      message: `Oops! Time’s out, ${name}. <br>Better luck next time!`,
       status: 'fail',
-      color: 'rgb(185, 31, 31)',
       src: '../../assets/images/timeout.png',
     };
   }
   if (score < 50) {
     return {
-      message: `You failed, ${name}`,
+      message: `It didn't work out this time, ${name},<br> but you can try again!`,
       status: 'fail',
-      color: 'red',
       src: '../../assets/images/fail.png',
     };
   }
 
   return {
-    message: `You passed, ${name}!`,
+    message: `Awesome, ${name}! <br>You nailed it! 😊`,
     status: 'success',
-    color: 'green',
     src: '../../assets/images/success.png',
   };
 };
@@ -72,8 +69,7 @@ const { message, status, color, src } = getStatusMessage(
 );
 
 resultImg.src = src;
-resultText.textContent = message;
-resultText.style.color = color;
+resultText.innerHTML = message;
 
 // Event Listener: Update user exam and navigate to home
 
@@ -109,6 +105,6 @@ homeBtn.addEventListener('click', async () => {
     location.href = `../Home/home.html?userId=${userData.id}`;
   } catch (error) {
     console.error('Error updating user exam:', error);
-    alert('An error occurred. Please try again later.');
+    location.href = '../../pages/Error/error.html';
   }
 });

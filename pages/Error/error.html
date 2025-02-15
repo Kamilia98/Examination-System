@@ -14,13 +14,17 @@
   </head>
   <body class="background-image">
     <div id="page">
-      <main class="result-page">
-        <div class="result-container bg-white">
-          <img id="resultImg" alt="" width="100%" />
-          <div id="resultText"></div>
+      <main class="error-page">
+        <div class="error-container bg-white">
+          <img id="" src="../../assets/images/error.png" alt="" width="300px" />
+          <div id="">An error Occured please try again later.</div>
           <button id="homeBtn">Back to home page</button>
         </div>
-        <script type="module" src="./result.js"></script>
+        <script>
+          document.querySelector('#homeBtn').addEventListener('click', () => {
+            location.href = '../../pages/Home/home.html';
+          });
+        </script>
       </main>
     </div>
   </body>

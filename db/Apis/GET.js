@@ -5,6 +5,7 @@ export async function fetchUsers() {
     });
 
     if (!response.ok) {
+      location.href = '../../pages/Error/error.html';
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
@@ -12,6 +13,7 @@ export async function fetchUsers() {
     return data;
   } catch (error) {
     console.error('Error fetching user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
@@ -30,6 +32,7 @@ export async function fetchUser(id) {
     return data;
   } catch (error) {
     console.error('Error fetching user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
@@ -48,6 +51,7 @@ export async function fetchExams() {
     return data;
   } catch (error) {
     console.error('Error fetching user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
@@ -66,6 +70,7 @@ export async function fetchExam(id) {
     return data;
   } catch (error) {
     console.error('Error fetching user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
@@ -80,6 +85,7 @@ export async function fetchQuestions(id, difficulty) {
     );
 
     if (!response.ok) {
+      location.href = '../../pages/Error/error.html';
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
@@ -87,6 +93,7 @@ export async function fetchQuestions(id, difficulty) {
     return data;
   } catch (error) {
     console.error('Error fetching user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }

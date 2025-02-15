@@ -18,6 +18,7 @@ export async function createUser(user) {
     return data; // Return the created user data
   } catch (error) {
     console.error('Error creating user:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
@@ -48,48 +49,7 @@ export async function updateUserExam(userId, examId, updatedExamData) {
     return updatedUser; // Return the updated user data
   } catch (error) {
     console.error('Error updating user exam:', error);
+    location.href = '../../pages/Error/error.html';
     return null;
   }
 }
-
-// New
-// export async function updateUserExam(userId, examId, updatedExam) {
-//   try {
-//     const users = await fetchUsers();
-//     const userIndex = users.findIndex((user) => user.id == userId);
-//     if (userIndex === -1) {
-//       throw new Error('User not found');
-//     }
-//     const user = users[userIndex];
-//     const examIndex = user.exams.findIndex((exam) => exam.examId == examId);
-//     if (examIndex === -1) {
-//       throw new Error('Exam not found');
-//     }
-
-//     // Update the exam in the user's exams array
-//     user.exams[examIndex] = updatedExam;
-
-//     // Log to check if the data is updated
-
-//     // Now update the users data on the server
-//     const response = await fetch('http://localhost:3000/users', {
-//       method: 'PUT',  // Use PUT for updating the entire users array
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(users), // Ensure you're sending the updated users array
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-
-//     // Optionally return the updated users array or some confirmation
-//     const updatedUsers = await response.json();
-//     return updatedUsers; // Return the updated users data from the server
-
-//   } catch (error) {
-//     console.error('Error updating user exam:', error);
-//     return null;
-//   }
-// }

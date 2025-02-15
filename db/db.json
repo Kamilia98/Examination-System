@@ -45,8 +45,8 @@
       "exams": [
         {
           "examId": 101,
-          "status": "pending",
-          "score": null
+          "status": "success",
+          "score": "50.00"
         },
         {
           "examId": 102,
@@ -134,22 +134,172 @@
           "score": null
         }
       ]
+    },
+    {
+      "id": 7,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "gender": "F",
+      "email": "kamirojgtiefthd01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "gender": "F",
+      "email": "kamiliaahmed01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "fail",
+          "score": "-1"
+        },
+        {
+          "examId": 102,
+          "status": "fail",
+          "score": "0.00"
+        },
+        {
+          "examId": 201,
+          "status": "success",
+          "score": "60.00"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "gender": "M",
+      "email": "kamiliaahmcsed01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "gender": "F",
+      "email": "kamiliijoaahmed01@gmail.com",
+      "password": "Kamilia123",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "fname": "kam",
+      "lname": "ahmed",
+      "gender": "F",
+      "email": "Kamiliaahmed01@gmail.com",
+      "password": "Stamina@9888.",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "success",
+          "score": "NaN"
+        },
+        {
+          "examId": 102,
+          "status": "success",
+          "score": "85.71"
+        },
+        {
+          "examId": 201,
+          "status": "fail",
+          "score": "0.00"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "fname": "kamilia",
+      "lname": "ahmed",
+      "gender": "F",
+      "email": "Kamiliaahjkmed01@gmail.com",
+      "password": "Stamina@9888.",
+      "exams": [
+        {
+          "examId": 101,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 102,
+          "status": "pending",
+          "score": null
+        },
+        {
+          "examId": 201,
+          "status": "pending",
+          "score": null
+        }
+      ]
     }
   ],
   "exams": [
     {
       "id": "101",
-      "title": "HTML Basics Exam",
-      "duration": 3
+      "title": "HTML Basics",
+      "duration": 0.5
     },
     {
       "id": "102",
-      "title": "CSS Fundamentals Exam",
+      "title": "CSS Fundamentals",
       "duration": 4
     },
     {
       "id": "201",
-      "title": "Advanced HTML and CSS Exam",
+      "title": "Advanced HTML and CSS",
       "duration": 5
     }
   ],

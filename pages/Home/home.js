@@ -81,7 +81,7 @@ function updateCircleChart(percentages) {
   const circles = document.querySelectorAll('.circle .circle-fill');
 
   // Iterate through percentages
-  const colors = ['green', 'red', 'orange'];
+  const colors = ['#074128', '#c53e3e', 'orange'];
   const types = ['success', 'fail', 'pending'];
 
   circles.forEach((circle, index) => {
@@ -124,9 +124,9 @@ async function createExamElement(userExam) {
     <div class="exam card h-100">
       <div class='exam-info'>
         <h5 class="card-title">${exam.title}</h5>
-        <p class="card-text fw-bold" style="color: ${getStatusColor(
+        <p class="card-text fw-bold exam-status" style="background-color: ${getStatusColor(
           userExam.status
-        )};">Status: ${userExam.status}</p>
+        )};">${userExam.status}</p>
       </div>
       <div class="exam-actions">
         ${
@@ -141,7 +141,11 @@ async function createExamElement(userExam) {
 }
 
 function getStatusColor(status) {
-  return status === 'success' ? 'green' : status === 'fail' ? 'red' : 'orange';
+  return status === 'success'
+    ? '#074128'
+    : status === 'fail'
+    ? '#c53e3e'
+    : 'orange';
 }
 
 function getExamActions(userExam, exam) {
@@ -155,7 +159,7 @@ function getExamActions(userExam, exam) {
     <button class="startBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-exam="${
       userExam.examId
     }" data-exam-title="${exam.title}">
-      ${userExam.status === 'fail' ? 'Retake' : 'Start'} Exam
+      ${userExam.status === 'fail' ? 'Retake' : 'Start'}
     </button>
   `;
 }
@@ -174,11 +178,10 @@ function handleStartExamClick(e) {
 
     const { exam, examTitle } = e.target.dataset;
     const difficulty = e.target.closest('div').querySelector('select').value;
-
-    modalTitle.textContent = `Start Exam: ${examTitle}`;
-    modalBody.innerHTML = `<p>Are you sure you want to start the exam?</p><p style="color:red;">Difficulty: ${getDifficultyText(
+    modalTitle.textContent = 'Start Exam';
+    modalBody.innerHTML = `Are you sure you want to start the "${examTitle}" exam? <br>The difficulty level is <span style="color:${getDifficultyColor(
       difficulty
-    )}</p>`;
+    )}">${getDifficultyText(difficulty)}</span>.`;
 
     confirmButton.onclick = () => {
       localStorage.setItem('currentExamId', exam);
@@ -195,6 +198,14 @@ function handleStartExamClick(e) {
 
 function getDifficultyText(difficulty) {
   return difficulty === 'm' ? 'medium' : difficulty === 'h' ? 'hard' : 'easy';
+}
+
+function getDifficultyColor(difficulty) {
+  return difficulty === 'm'
+    ? 'orange'
+    : difficulty === 'h'
+    ? '#c53e3e'
+    : '#074128';
 }
 
 // Initialize the page
