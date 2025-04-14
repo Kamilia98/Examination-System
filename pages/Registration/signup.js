@@ -16,23 +16,47 @@ const inputs = {
   gender: signupForm.querySelectorAll('input[name="gender"]'),
 };
 
-const errorMessages = signupForm.querySelectorAll('.error-message');
+const errorMessages = {
+  fName: {
+    required: 'First name is required.',
+    invalid: '3-20 characters',
+  },
+  lName: {
+    required: 'Last name is required.',
+    invalid: '3-20 characters.',
+  },
+  email: {
+    required: 'Email is required.',
+    invalid: 'Please enter a valid email address.',
+  },
+  password: {
+    required: 'Password is required.',
+    invalid: 'Password must be 8+ characters with upper, lower, and a number.',
+  },
+  confirmPassword: {
+    required: 'Please confirm your password.',
+    invalid: 'Passwords do not match.',
+  },
+  gender: {
+    required: 'Gender selection is required.',
+  },
+};
 // Error Messages
 const errors = {
-  fName: inputs.fName.closest('.form-input').querySelector('.error-message'),
-  lName: inputs.lName.closest('.form-input').querySelector('.error-message'),
-  email: inputs.email.closest('.form-input').querySelector('.error-message'),
+  fName: inputs.fName.closest('.form-group').querySelector('.error-message'),
+  lName: inputs.lName.closest('.form-group').querySelector('.error-message'),
+  email: inputs.email.closest('.form-group').querySelector('.error-message'),
   gender: signupForm
-    .querySelector('.form-input input[name="gender"]')
-    .closest('.form-input')
+    .querySelector('.form-group input[name="gender"]')
+    .closest('.form-group')
     .querySelector('.error-message'),
   password: inputs.password
-    .closest('.form-input')
+    .closest('.form-group')
     .querySelector('.error-message'),
   confirmPassword: inputs.confirmPassword
-    .closest('.form-input')
+    .closest('.form-group')
     .querySelector('.error-message'),
-  formError: errorMessages[errorMessages.length - 1],
+  formError: signupForm.lastElementChild,
 };
 
 // Toggle Password Visibility
@@ -59,7 +83,6 @@ const validatePassword = (password) =>
   /[a-z]/.test(password) &&
   /[0-9]/.test(password);
 
-// Clear Errors and Styles (updated for gender inputs)
 const clearErrors = () => {
   Object.values(errors).forEach((error) => {
     error.classList.remove('show');
@@ -67,31 +90,14 @@ const clearErrors = () => {
   });
 
   Object.values(inputs).forEach((input) => {
-    if (input instanceof NodeList) {
-      input.forEach((inp) => {
-        inp.classList.remove('error');
-        inp.removeAttribute('aria-invalid');
-        inp.closest('label').classList.remove('error');
-      });
-    } else {
-      input.classList.remove('error');
-      input.removeAttribute('aria-invalid');
-    }
+    input.classList?.remove('error');
   });
 };
+
 // Form Submission
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  // Clear previous errors
-  Object.values(errors).forEach((error) => error.classList.remove('show'));
-  Object.values(inputs).forEach((input) => {
-    if (input instanceof NodeList) {
-      input.forEach((inp) => inp.classList.remove('error'));
-    } else {
-      input.classList.remove('error');
-    }
-  });
+  clearErrors(); // Clear previous errors before validation
 
   const selectedGender = Array.from(inputs.gender).find(
     (radio) => radio.checked
@@ -99,17 +105,27 @@ signupForm.addEventListener('submit', async (e) => {
 
   // Validate inputs
   const validationResults = {
-    fName: validateName(inputs.fName.value),
-    lName: validateName(inputs.lName.value),
-    email: validateEmail(inputs.email.value),
-    gender: !!selectedGender,
-    password: validatePassword(inputs.password.value),
-    confirmPassword: inputs.password.value === inputs.confirmPassword.value,
+    fName: inputs.fName.value ? validateName(inputs.fName.value) : null,
+    lName: inputs.lName.value ? validateName(inputs.lName.value) : null,
+    email: inputs.email.value ? validateEmail(inputs.email.value) : null,
+    password: inputs.password.value
+      ? validatePassword(inputs.password.value)
+      : null,
+    confirmPassword: inputs.confirmPassword.value
+      ? inputs.password.value === inputs.confirmPassword.value
+      : null,
+    gender: selectedGender ? true : null,
   };
 
   // Display validation errors
   Object.keys(validationResults).forEach((key) => {
-    if (!validationResults[key]) {
+    if (validationResults[key] === null) {
+      errors[key].textContent = errorMessages[key].required;
+    } else if (validationResults[key] === false) {
+      errors[key].textContent = errorMessages[key].invalid;
+    }
+
+    if (validationResults[key] === null || validationResults[key] === false) {
       errors[key].classList.add('show');
       if (key === 'gender') {
         inputs.gender.forEach((radio) =>
@@ -131,7 +147,7 @@ signupForm.addEventListener('submit', async (e) => {
 
       if (isExistingUser) {
         errors.formError.textContent =
-          'This Email already exists. Please try logging in.';
+          'This email already exists. Please try logging in.';
         errors.formError.classList.add('show');
       } else {
         const newUser = {
