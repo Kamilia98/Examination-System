@@ -87,7 +87,6 @@ flagBtn.addEventListener('click', markQuestionAsFlagged);
     console.error('Error fetching data:', error);
     location.href = '../../pages/Error/error.html';
     // Ensure loader is hidden even if there's an error
-
     loader.classList.add('hidden');
   }
 })();

@@ -2,7 +2,7 @@ import { fetchUser, fetchUsers } from './GET.js';
 
 export async function createUser(user) {
   try {
-    const response = await fetch(`http://localhost:3000/users`, {
+    const response = await fetch(`http://localhost:5000/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', // Set content type to JSON
@@ -33,7 +33,7 @@ export async function updateUserExam(userId, examId, updatedExamData) {
     }
     user.exams[examIndex] = updatedExamData;
 
-    const response = await fetch(`http://localhost:3000/users/${userId}`, {
+    const response = await fetch(`http://localhost:5000/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

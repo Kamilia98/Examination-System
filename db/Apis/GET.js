@@ -1,6 +1,6 @@
 export async function fetchUsers() {
   try {
-    const response = await fetch(`http://localhost:3000/users`, {
+    const response = await fetch(`http://localhost:5000/users`, {
       method: 'GET',
     });
 
@@ -20,7 +20,7 @@ export async function fetchUsers() {
 
 export async function fetchUser(id) {
   try {
-    const response = await fetch(`http://localhost:3000/users?id=${id}`, {
+    const response = await fetch(`http://localhost:5000/users?id=${id}`, {
       method: 'GET',
     });
 
@@ -39,7 +39,7 @@ export async function fetchUser(id) {
 
 export async function fetchExams() {
   try {
-    const response = await fetch(`http://localhost:3000/exams`, {
+    const response = await fetch(`http://localhost:5000/exams`, {
       method: 'GET',
     });
 
@@ -58,7 +58,7 @@ export async function fetchExams() {
 
 export async function fetchExam(id) {
   try {
-    const response = await fetch(`http://localhost:3000/exams?id=${id}`, {
+    const response = await fetch(`http://localhost:5000/exams?id=${id}`, {
       method: 'GET',
     });
 
@@ -78,7 +78,7 @@ export async function fetchExam(id) {
 export async function fetchQuestions(id, difficulty) {
   try {
     const response = await fetch(
-      `http://localhost:3000/questions?examId=${id}&difficulty=${difficulty}`,
+      `http://localhost:5000/questions?examId=${id}&difficulty=${difficulty}`,
       {
         method: 'GET',
       }
